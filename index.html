@@ -1,0 +1,1418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Geodesic Research | The shortest path to impact</title>
+  <meta name="description" content="Geodesic Research is a technical AI Safety organization founded at the University of Cambridge. We train models end-to-end to validate safety and alignment.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Karla:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg-light: #FAFAFA;
+      --bg-dark: #FAFAFA;
+      --bg-card: #EBE3D9;
+      --bg-card-hover: #e0d5c8;
+      --text-primary: #1A1A1A;
+      --text-light: #FAFAFA;
+      --text-muted: #6E4C4B;
+      --accent: #154d39;
+      --accent-light: #1d6b4f;
+      --accent-gold: #154d39;
+      --border: #EBE3D9;
+      --font-display: 'Cormorant', Georgia, serif;
+      --font-body: 'Karla', -apple-system, sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      font-family: var(--font-body);
+      font-weight: 500;
+      color: var(--text-primary);
+      background: var(--bg-light);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+    }
+
+    ::selection {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+      transition: color 0.25s ease;
+    }
+
+    a:hover {
+      color: var(--accent-light);
+    }
+
+    /* ========== NAVIGATION ========== */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 1.25rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: background 0.4s ease, box-shadow 0.4s ease, padding 0.4s ease;
+    }
+
+    nav.scrolled {
+      background: rgba(250, 250, 250, 0.95);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 1px 0 rgba(0,0,0,0.06);
+      padding: 0.8rem 3rem;
+    }
+
+    .nav-logo {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      letter-spacing: 0.04em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.25s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--text-primary);
+    }
+
+    .nav-mobile-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.5rem;
+    }
+
+    .nav-mobile-toggle span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--text-primary);
+      margin: 5px 0;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    /* ========== HERO ========== */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      background: var(--bg-dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .hero-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0.6;
+    }
+
+    .hero-grain {
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .hero-label {
+      font-family: var(--font-body);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: #975654;
+      margin-bottom: 2rem;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.8s ease 0.3s forwards;
+    }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 8vw, 7rem);
+      font-weight: 300;
+      color: var(--text-primary);
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeUp 1s ease 0.5s forwards;
+    }
+
+    .hero-title em {
+      font-style: italic;
+      font-weight: 400;
+      color: var(--accent);
+    }
+
+    .hero-tagline {
+      font-family: var(--font-body);
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      color: var(--text-muted);
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.8s ease 0.8s forwards;
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 3rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 1.2s forwards;
+    }
+
+    .hero-scroll-line {
+      width: 1px;
+      height: 48px;
+      background: linear-gradient(to bottom, var(--accent), transparent);
+      margin: 0 auto;
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.3; transform: scaleY(0.6); transform-origin: top; }
+      50% { opacity: 1; transform: scaleY(1); transform-origin: top; }
+    }
+
+    /* ========== SECTIONS COMMON ========== */
+    .section {
+      padding: 3rem 3rem;
+    }
+
+    .section-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-family: var(--font-body);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+    }
+
+    .section-heading {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 400;
+      line-height: 1.2;
+      color: var(--text-primary);
+      margin-bottom: 2rem;
+    }
+
+    .section-heading--light {
+      color: var(--text-primary);
+    }
+
+    /* Reveal animations */
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.7s cubic-bezier(0.23, 1, 0.32, 1),
+                  transform 0.7s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ========== ABOUT ========== */
+    .about {
+      background: var(--bg-light);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .about-statement {
+      font-family: var(--font-display);
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 400;
+      line-height: 1.35;
+      color: var(--text-primary);
+      letter-spacing: -0.01em;
+    }
+
+    .about-statement em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .about-body {
+      font-size: 1rem;
+      color: var(--text-muted);
+      line-height: 1.85;
+    }
+
+    .about-body p + p {
+      margin-top: 1.25rem;
+    }
+
+    .about-separator {
+      width: 48px;
+      height: 1px;
+      background: var(--accent-gold);
+      margin: 3rem 0;
+    }
+
+    .about-approach {
+      display: flex;
+      gap: 2rem;
+      margin-top: 3rem;
+      padding-top: 3rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .about-approach-item {
+      flex: 1;
+    }
+
+    .about-approach-num {
+      font-family: var(--font-display);
+      font-size: 2.5rem;
+      font-weight: 300;
+      color: var(--accent-gold);
+      line-height: 1;
+      margin-bottom: 0.75rem;
+    }
+
+    .about-approach-title {
+      font-weight: 600;
+      font-size: 0.85rem;
+      letter-spacing: 0.04em;
+      margin-bottom: 0.5rem;
+    }
+
+    .about-approach-desc {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+    }
+
+    /* ========== RESEARCH ========== */
+    .research {
+      background: var(--bg-dark);
+      position: relative;
+    }
+
+    .research .section-label {
+      color: var(--accent);
+    }
+
+    .research-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+
+    .research-card {
+      background: rgba(0, 0, 0, 0.02);
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      padding: 2.5rem 2rem;
+      transition: background 0.35s ease, border-color 0.35s ease, transform 0.35s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .research-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-gold));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.45s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+
+    .research-card:hover {
+      background: rgba(0, 0, 0, 0.04);
+      border-color: var(--accent);
+      transform: translateY(-4px);
+    }
+
+    .research-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .research-card-num {
+      font-family: var(--font-display);
+      font-size: 3.5rem;
+      font-weight: 300;
+      color: rgba(21, 77, 57, 0.2);
+      line-height: 1;
+      margin-bottom: 1.5rem;
+    }
+
+    .research-card-title {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 500;
+      color: var(--text-primary);
+      margin-bottom: 1rem;
+      line-height: 1.25;
+    }
+
+    .research-card-desc {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.75;
+    }
+
+    .research-card-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin-top: 1.5rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--accent-gold);
+      transition: gap 0.3s ease;
+    }
+
+    .research-card-link:hover {
+      gap: 0.7rem;
+      color: var(--accent-gold);
+    }
+
+    .research-card-link svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    /* ========== TEAM ========== */
+    .team {
+      background: var(--bg-light);
+    }
+
+    .team-intro {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      max-width: 600px;
+      line-height: 1.75;
+      margin-bottom: 3.5rem;
+    }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2.5rem;
+    }
+
+    .team-member {
+      text-align: center;
+    }
+
+    .team-avatar {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      margin: 0 auto 1.25rem;
+      overflow: hidden;
+      transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+
+    .team-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .team-member:hover .team-avatar {
+      transform: scale(1.06);
+    }
+
+    .team-name {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 0.3rem;
+    }
+
+    .team-name a {
+      color: var(--text-primary);
+      transition: color 0.25s ease;
+    }
+
+    .team-name a:hover {
+      color: var(--accent);
+    }
+
+    .team-role {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      font-weight: 400;
+    }
+
+    .team-bio {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+      margin-top: 0.75rem;
+      text-align: left;
+    }
+
+    /* ========== ADVISORS ========== */
+    .advisors {
+      background: var(--bg-card);
+      border-top: 1px solid var(--border);
+    }
+
+    .advisors-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2.5rem;
+      margin-top: 3rem;
+    }
+
+    .advisor-card {
+      background: var(--bg-light);
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      padding: 2.5rem 2rem;
+      text-align: center;
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
+    }
+
+    .advisor-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.06);
+    }
+
+    .advisor-avatar {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      margin: 0 auto 1.25rem;
+      overflow: hidden;
+    }
+
+    .advisor-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .advisor-name {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 0.35rem;
+    }
+
+    .advisor-affiliation {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 1.25rem;
+    }
+
+    .advisor-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--accent);
+      border: 1px solid var(--border);
+      padding: 0.55rem;
+      border-radius: 2px;
+      transition: all 0.25s ease;
+    }
+
+    .advisor-link:hover {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+
+    .advisor-links {
+      display: flex;
+      gap: 0.5rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .advisor-link svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    .advisor-link--lw {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      line-height: 1;
+    }
+
+    /* ========== CAREERS CTA ========== */
+    .careers {
+      background: var(--bg-light);
+      text-align: center;
+      border-top: 1px solid var(--border);
+    }
+
+    .careers-inner {
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    .careers-heading {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      font-weight: 400;
+      line-height: 1.25;
+      margin-bottom: 1.25rem;
+    }
+
+    .careers-body {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      line-height: 1.75;
+      margin-bottom: 2rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--font-body);
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 1rem 2.5rem;
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+
+    .btn--primary {
+      background: var(--accent);
+      color: #fff;
+      border: 1px solid var(--accent);
+    }
+
+    .btn--primary:hover {
+      background: var(--accent-light);
+      border-color: var(--accent-light);
+      color: #fff;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(21, 77, 57, 0.35);
+    }
+
+    /* ========== FOOTER ========== */
+    footer {
+      background: var(--bg-dark);
+      padding: 4rem 3rem 3rem;
+    }
+
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .footer-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: start;
+      padding-bottom: 3rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .footer-brand {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 500;
+      color: var(--text-primary);
+      margin-bottom: 0.75rem;
+    }
+
+    .footer-address {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+    }
+
+    .footer-socials {
+      display: flex;
+      gap: 1.25rem;
+    }
+
+    .footer-social-link {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      transition: all 0.25s ease;
+    }
+
+    .footer-social-link:hover {
+      border-color: var(--accent-gold);
+      color: var(--accent-gold);
+    }
+
+    .footer-social-link svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 2rem;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    .footer-bottom a {
+      color: var(--text-muted);
+    }
+
+    .footer-bottom a:hover {
+      color: var(--text-primary);
+    }
+
+    /* ========== ANIMATIONS ========== */
+    @keyframes fadeUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ========== RESPONSIVE ========== */
+    @media (max-width: 1024px) {
+      .research-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .section {
+        padding: 2rem 1.5rem;
+      }
+
+      nav {
+        padding: 1rem 1.5rem;
+      }
+
+      nav.scrolled {
+        padding: 0.7rem 1.5rem;
+      }
+
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: rgba(250, 250, 250, 0.97);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        flex-direction: column;
+        padding: 1.5rem;
+        gap: 1rem;
+      }
+
+      .nav-links.open {
+        display: flex;
+      }
+
+      .nav-mobile-toggle {
+        display: block;
+      }
+
+      .about-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .about-approach {
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+
+      .research-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .team-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .advisors-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      .footer-top {
+        flex-direction: column;
+        gap: 2rem;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        gap: 0.75rem;
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero-title {
+        font-size: 2.6rem;
+      }
+
+      .team-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav id="nav">
+    <a href="#" class="nav-logo">Geodesic</a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#about">About</a></li>
+      <li><a href="#research">Research</a></li>
+      <li><a href="#team">Team</a></li>
+      <li><a href="#advisors">Advisors</a></li>
+      <li><a href="#careers">Careers</a></li>
+    </ul>
+    <button class="nav-mobile-toggle" id="navToggle" aria-label="Toggle navigation">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero" id="hero">
+    <canvas class="hero-canvas" id="geodesicCanvas"></canvas>
+    <div class="hero-grain"></div>
+    <div class="hero-content">
+      <p class="hero-label">AI Safety Research &middot; Cambridge, United Kingdom</p>
+      <h1 class="hero-title">Geodesic<br><em>Research</em></h1>
+      <p class="hero-tagline">The shortest path to impact</p>
+    </div>
+    <div class="hero-scroll">
+      <div class="hero-scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section class="section about" id="about">
+    <div class="section-inner">
+      <p class="section-label reveal">About Us</p>
+      <div class="about-grid">
+        <div class="reveal" style="transition-delay: 0.1s;">
+          <h2 class="about-statement">We are building the science of <em>alignment and control pretraining</em>&mdash;determining whether safety can be an end-to-end strategy throughout model training.</h2>
+        </div>
+        <div class="reveal" style="transition-delay: 0.2s;">
+          <div class="about-body">
+            <p>Geodesic Research is a UK-based technical AI Safety organisation founded at the University of Cambridge. While there is an established science of pretraining's influence on capabilities, no such science exists for safety. We aim to change that.</p>
+            <p>Our purpose is two-fold: to explore scalable pretraining approaches we have reason to believe are not yet standard practice at frontier labs, and to facilitate adoption of any promising techniques we develop. We will consider Geodesic successful if we determine that pretraining has no obvious impact on safety&mdash;or if we determine that pretraining interventions are viable and facilitate their adoption at frontier labs.</p>
+          </div>
+        </div>
+      </div>
+      <div class="about-approach reveal" style="transition-delay: 0.3s;">
+        <div class="about-approach-item">
+          <div class="about-approach-num">01</div>
+          <div class="about-approach-title">Neglected Yet Promising</div>
+          <div class="about-approach-desc">Pretraining accounts for the majority of FLOPs and is when models acquire much of their world knowledge. Safety research has largely overlooked this stage.</div>
+        </div>
+        <div class="about-approach-item">
+          <div class="about-approach-num">02</div>
+          <div class="about-approach-title">Uniquely Positioned</div>
+          <div class="about-approach-desc">We are among the few in the AI safety community outside frontier labs capable of pretraining LLMs from scratch. If we don't pursue this, nobody else will in the short term.</div>
+        </div>
+        <div class="about-approach-item">
+          <div class="about-approach-num">03</div>
+          <div class="about-approach-title">Frontier Lab Impact</div>
+          <div class="about-approach-desc">Our primary goal is to develop interventions that frontier labs adopt, deepening relationships with researchers at OpenAI, Anthropic, and Google DeepMind.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Research -->
+  <section class="section research" id="research">
+    <div class="section-inner">
+      <p class="section-label reveal">Our Research</p>
+      <h2 class="section-heading section-heading--light reveal" style="transition-delay: 0.1s;">Can alignment and control be<br>end-to-end strategies?</h2>
+      <div class="research-grid">
+        <div class="research-card reveal" style="transition-delay: 0.15s;">
+          <div class="research-card-num">01</div>
+          <div class="research-card-title">Scaling Alignment Pretraining</div>
+          <div class="research-card-desc">Our first paper found that AI discourse causes self-fulfilling (mis)alignment. We are now scaling our experimental setup to include reasoning models, agentic misalignment evaluations, and larger training datasets to determine whether alignment pretraining is production-ready for frontier labs.</div>
+          <a href="https://alignmentpretraining.ai" target="_blank" rel="noopener" class="research-card-link">
+            Learn more
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 12L12 4M12 4H5M12 4v7"/></svg>
+          </a>
+        </div>
+        <div class="research-card reveal" style="transition-delay: 0.25s;">
+          <div class="research-card-num">02</div>
+          <div class="research-card-title">Control Pretraining</div>
+          <div class="research-card-desc">Base models already understand concepts like alignment faking and monitoring. We explore shaping this knowledge during pretraining&mdash;reducing the likelihood that misaligned AIs possess knowledge differentially useful for circumventing control protocols, strategy sandbagging, or dangerous technical capabilities.</div>
+        </div>
+        <div class="research-card reveal" style="transition-delay: 0.35s;">
+          <div class="research-card-num">03</div>
+          <div class="research-card-title">Exploratory Directions</div>
+          <div class="research-card-desc">We are investigating inoculation midtraining, deep character training, scaling laws for dangerous capability prevention, and intensive pretraining interventions&mdash;exploring the full landscape of how pretraining can complement post-training safety.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Team -->
+  <section class="section team" id="team">
+    <div class="section-inner">
+      <p class="section-label reveal">The Team</p>
+      <h2 class="section-heading reveal" style="transition-delay: 0.1s;">Founded in Cambridge, UK</h2>
+      <div class="team-grid">
+        <div class="team-member reveal" style="transition-delay: 0.2s;">
+          <div class="team-avatar"><img src="https://images.squarespace-cdn.com/content/v1/6882331cc8e48261cde0a528/6a0096ca-b0d3-42bc-a1fd-daf276e25f0d/Puria+Radmard.png" alt="Puria Radmard"></div>
+          <div class="team-name"><a href="https://www.geodesicresearch.org/puria-radmard">Puria Radmard</a></div>
+          <div class="team-role">Founder &amp; Co-Director</div>
+          <p class="team-bio">PhD student in theoretical neuroscience at the University of Cambridge. Led Geodesic's early work on steganography. Previously a machine learning engineer at raft.ai and a private equity quantitative strategist at Goldman Sachs.</p>
+        </div>
+        <div class="team-member reveal" style="transition-delay: 0.25s;">
+          <div class="team-avatar"><img src="https://images.squarespace-cdn.com/content/v1/6882331cc8e48261cde0a528/aca40ef0-5b62-48de-88aa-5f59a6d20e64/Cam+Tice.jpg" alt="Cameron Tice"></div>
+          <div class="team-name"><a href="https://www.geodesicresearch.org/cameron-tice">Cameron Tice</a></div>
+          <div class="team-role">Founder &amp; Co-Director</div>
+          <p class="team-bio">Marshall Scholar at the University of Cambridge, where he completed his MPhil on automated research with LLMs for computational psychiatry. Lead author of Noise Injection for Sandbagging Detection and a former Research Manager for the ERA: AI fellowship.</p>
+        </div>
+        <div class="team-member reveal" style="transition-delay: 0.3s;">
+          <div class="team-avatar"><img src="https://alexandranarincom.wordpress.com/wp-content/uploads/2023/01/dsc_6916.jpg?w=684" alt="Alexandra Narin"></div>
+          <div class="team-name">Alexandra Narin</div>
+          <div class="team-role">Strategic Delivery</div>
+          <p class="team-bio">Cofounded the UK AI Forum and served as Head of Grants at a Biotech company, securing and managing over $5M in private and government funding. Managed key partnerships and oversaw delivery of publications, customer lab reports, and patents.</p>
+        </div>
+        <div class="team-member reveal" style="transition-delay: 0.35s;">
+          <div class="team-avatar"><img src="https://images.squarespace-cdn.com/content/v1/6882331cc8e48261cde0a528/3e42c338-4601-4c87-8bb0-ebcc08a0d43a/image+%285%29.png" alt="Kyle O'Brien"></div>
+          <div class="team-name"><a href="https://kyleobrien.io">Kyle O'Brien</a></div>
+          <div class="team-role">Founding Member of Technical Staff</div>
+          <p class="team-bio">Joined Geodesic through the ERA fellowship. Leads the alignment pretraining research agenda and has developed strong relationships with UK AISI through previous research on Deep Ignorance. Previously at EleutherAI and Microsoft.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Advisors -->
+  <section class="section advisors" id="advisors">
+    <div class="section-inner">
+      <p class="section-label reveal">Advisors</p>
+      <h2 class="section-heading reveal" style="transition-delay: 0.1s;">Guided by leading researchers</h2>
+      <div class="advisors-grid">
+        <div class="advisor-card reveal" style="transition-delay: 0.15s;">
+          <div class="advisor-avatar"><img src="https://assets.turntrout.com/Attachments/Pasted image 20240614164142.avif" alt="Alex Turner"></div>
+          <div class="advisor-name">Alex Turner</div>
+          <div class="advisor-affiliation">Google DeepMind</div>
+          <div class="advisor-links">
+            <a href="https://turntrout.com" target="_blank" rel="noopener" class="advisor-link">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            </a>
+            <a href="https://scholar.google.com/citations?user=thAHiVcAAAAJ&hl=en" target="_blank" rel="noopener" class="advisor-link">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 24a7 7 0 1 1 0-14 7 7 0 0 1 0 14zm0-24L0 9.5l4.838 3.94A8 8 0 0 1 12 9a8 8 0 0 1 7.162 4.44L24 9.5z"/></svg>
+            </a>
+            <a href="https://www.lesswrong.com/users/turntrout" target="_blank" rel="noopener" class="advisor-link" aria-label="LessWrong"><svg viewBox="0 0 100 100" fill="currentColor"><path d="M29.1,29.2l6.4,11.6l4.3-0.8l0.8-4.3L29.1,29.2z M40.7,64.5l-0.8-4.3l-4.3-0.8L29.2,71L40.7,64.5z M70.9,70.9l-6.4-11.6l-4.3,0.8l-0.8,4.3L70.9,70.9z M64.4,40.8l6.4-11.6l-11.6,6.4l0.8,4.3L64.4,40.8z M67.4,58.8l10.8,19.4L58.8,67.4L50,98.8l-8.8-31.4L21.9,78.2l10.8-19.4L1.2,50.1l31.4-8.8L21.9,21.9l19.4,10.8L50,1.3l8.8,31.4l19.4-10.8L67.4,41.3L98.8,50L67.4,58.8zM57.7,57.8L83.5,50L50,50.1l7.7-7.7L50,16.6v33.5l-7.7-7.7l-25.8,7.7H50l-7.7,7.7L50,83.5V50.1L57.7,57.8z"/></svg></a>
+          </div>
+        </div>
+        <div class="advisor-card reveal" style="transition-delay: 0.25s;">
+          <div class="advisor-avatar"><img src="https://tomekkorbak.com/images/IMG_9188_cop.jpg" alt="Tomek Korbak"></div>
+          <div class="advisor-name">Tomek Korbak</div>
+          <div class="advisor-affiliation">OpenAI</div>
+          <div class="advisor-links">
+            <a href="https://tomekkorbak.com" target="_blank" rel="noopener" class="advisor-link">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            </a>
+            <a href="https://scholar.google.com/citations?user=YQ5rrk4AAAAJ&hl=en" target="_blank" rel="noopener" class="advisor-link">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 24a7 7 0 1 1 0-14 7 7 0 0 1 0 14zm0-24L0 9.5l4.838 3.94A8 8 0 0 1 12 9a8 8 0 0 1 7.162 4.44L24 9.5z"/></svg>
+            </a>
+            <a href="https://www.lesswrong.com/users/tomek-korbak" target="_blank" rel="noopener" class="advisor-link" aria-label="LessWrong"><svg viewBox="0 0 100 100" fill="currentColor"><path d="M29.1,29.2l6.4,11.6l4.3-0.8l0.8-4.3L29.1,29.2z M40.7,64.5l-0.8-4.3l-4.3-0.8L29.2,71L40.7,64.5z M70.9,70.9l-6.4-11.6l-4.3,0.8l-0.8,4.3L70.9,70.9z M64.4,40.8l6.4-11.6l-11.6,6.4l0.8,4.3L64.4,40.8z M67.4,58.8l10.8,19.4L58.8,67.4L50,98.8l-8.8-31.4L21.9,78.2l10.8-19.4L1.2,50.1l31.4-8.8L21.9,21.9l19.4,10.8L50,1.3l8.8,31.4l19.4-10.8L67.4,41.3L98.8,50L67.4,58.8zM57.7,57.8L83.5,50L50,50.1l7.7-7.7L50,16.6v33.5l-7.7-7.7l-25.8,7.7H50l-7.7,7.7L50,83.5V50.1L57.7,57.8z"/></svg></a>
+          </div>
+        </div>
+        <div class="advisor-card reveal" style="transition-delay: 0.35s;">
+          <div class="advisor-avatar"><img src="https://cdn.prod.website-files.com/6909901117f6b8d83783ca73/693e277c84dd423a267b246b_alex-cloud_headshot.avif" alt="Alex Cloud"></div>
+          <div class="advisor-name">Alex Cloud</div>
+          <div class="advisor-affiliation">Anthropic</div>
+          <div class="advisor-links">
+            <a href="https://scholar.google.com/citations?user=TuFDzRYAAAAJ&hl=en" target="_blank" rel="noopener" class="advisor-link">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 24a7 7 0 1 1 0-14 7 7 0 0 1 0 14zm0-24L0 9.5l4.838 3.94A8 8 0 0 1 12 9a8 8 0 0 1 7.162 4.44L24 9.5z"/></svg>
+            </a>
+            <a href="https://www.lesswrong.com/users/cloud-1" target="_blank" rel="noopener" class="advisor-link" aria-label="LessWrong"><svg viewBox="0 0 100 100" fill="currentColor"><path d="M29.1,29.2l6.4,11.6l4.3-0.8l0.8-4.3L29.1,29.2z M40.7,64.5l-0.8-4.3l-4.3-0.8L29.2,71L40.7,64.5z M70.9,70.9l-6.4-11.6l-4.3,0.8l-0.8,4.3L70.9,70.9z M64.4,40.8l6.4-11.6l-11.6,6.4l0.8,4.3L64.4,40.8z M67.4,58.8l10.8,19.4L58.8,67.4L50,98.8l-8.8-31.4L21.9,78.2l10.8-19.4L1.2,50.1l31.4-8.8L21.9,21.9l19.4,10.8L50,1.3l8.8,31.4l19.4-10.8L67.4,41.3L98.8,50L67.4,58.8zM57.7,57.8L83.5,50L50,50.1l7.7-7.7L50,16.6v33.5l-7.7-7.7l-25.8,7.7H50l-7.7,7.7L50,83.5V50.1L57.7,57.8z"/></svg></a>
+          </div>
+        </div>
+        <div class="advisor-card reveal" style="transition-delay: 0.45s;">
+          <div class="advisor-avatar"><img src="https://scholar.googleusercontent.com/citations?view_op=medium_photo&user=JsydmjkAAAAJ&citpid=6" alt="David Demitri Africa"></div>
+          <div class="advisor-name">David Demitri Africa</div>
+          <div class="advisor-affiliation">UK AISI</div>
+          <div class="advisor-links">
+            <a href="https://daviddemitriafrica.github.io" target="_blank" rel="noopener" class="advisor-link">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            </a>
+            <a href="https://scholar.google.com/citations?user=JsydmjkAAAAJ&hl=en" target="_blank" rel="noopener" class="advisor-link">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 24a7 7 0 1 1 0-14 7 7 0 0 1 0 14zm0-24L0 9.5l4.838 3.94A8 8 0 0 1 12 9a8 8 0 0 1 7.162 4.44L24 9.5z"/></svg>
+            </a>
+            <a href="https://www.lesswrong.com/users/david-africa" target="_blank" rel="noopener" class="advisor-link" aria-label="LessWrong"><svg viewBox="0 0 100 100" fill="currentColor"><path d="M29.1,29.2l6.4,11.6l4.3-0.8l0.8-4.3L29.1,29.2z M40.7,64.5l-0.8-4.3l-4.3-0.8L29.2,71L40.7,64.5z M70.9,70.9l-6.4-11.6l-4.3,0.8l-0.8,4.3L70.9,70.9z M64.4,40.8l6.4-11.6l-11.6,6.4l0.8,4.3L64.4,40.8z M67.4,58.8l10.8,19.4L58.8,67.4L50,98.8l-8.8-31.4L21.9,78.2l10.8-19.4L1.2,50.1l31.4-8.8L21.9,21.9l19.4,10.8L50,1.3l8.8,31.4l19.4-10.8L67.4,41.3L98.8,50L67.4,58.8zM57.7,57.8L83.5,50L50,50.1l7.7-7.7L50,16.6v33.5l-7.7-7.7l-25.8,7.7H50l-7.7,7.7L50,83.5V50.1L57.7,57.8z"/></svg></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Careers -->
+  <section class="section careers" id="careers">
+    <div class="section-inner">
+      <div class="careers-inner">
+        <p class="section-label reveal">Join Us</p>
+        <h2 class="careers-heading reveal" style="transition-delay: 0.1s;">Help build the future<br>of AI safety</h2>
+        <p class="careers-body reveal" style="transition-delay: 0.15s;">We're looking for exceptional researchers and engineers who want to work on one of the most important problems of our time.</p>
+        <div class="reveal" style="transition-delay: 0.2s;">
+          <a href="https://www.geodesicresearch.org/careers" class="btn btn--primary">View Open Positions</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div>
+          <div class="footer-brand">Geodesic Research</div>
+          <div class="footer-address">
+            53&ndash;54 Sidney Street<br>
+            Cambridge, UK
+          </div>
+        </div>
+        <div class="footer-socials">
+          <a href="https://x.com/GeodesResearch" target="_blank" rel="noopener" class="footer-social-link" aria-label="X / Twitter">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </a>
+          <a href="https://www.linkedin.com/company/geodesic-research" target="_blank" rel="noopener" class="footer-social-link" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2025 Geodesic / <a href="https://find-and-update.company-information.service.gov.uk/company/13653958" target="_blank" rel="noopener">Meridian Impact CIC</a></span>
+        <span>A UK not-for-profit with US 501(c)(3) equivalency</span>
+      </div>
+      <div style="text-align: center; padding-top: 1.5rem; font-size: 0.7rem; color: var(--text-muted); opacity: 0.5; letter-spacing: 0.05em;">Built with Claude Opus 4.6</div>
+    </div>
+  </footer>
+
+  <script>
+    // ===== Geodesic Dome Animation =====
+    (function() {
+      const canvas = document.getElementById('geodesicCanvas');
+      const ctx = canvas.getContext('2d');
+      let width, height, dpr, radius;
+
+      function resize() {
+        dpr = window.devicePixelRatio || 1;
+        width = canvas.parentElement.offsetWidth;
+        height = canvas.parentElement.offsetHeight;
+        canvas.width = width * dpr;
+        canvas.height = height * dpr;
+        canvas.style.width = width + 'px';
+        canvas.style.height = height + 'px';
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        radius = Math.min(width, height) * 0.34;
+      }
+
+      resize();
+      window.addEventListener('resize', resize);
+
+      // Build geodesic dome: icosahedron subdivided 3x, keep upper hemisphere
+      const phi = (1 + Math.sqrt(5)) / 2;
+      const icoVerts = [
+        [-1, phi, 0], [1, phi, 0], [-1, -phi, 0], [1, -phi, 0],
+        [0, -1, phi], [0, 1, phi], [0, -1, -phi], [0, 1, -phi],
+        [phi, 0, -1], [phi, 0, 1], [-phi, 0, -1], [-phi, 0, 1]
+      ];
+      const icoFaces = [
+        [0,11,5],[0,5,1],[0,1,7],[0,7,10],[0,10,11],
+        [1,5,9],[5,11,4],[11,10,2],[10,7,6],[7,1,8],
+        [3,9,4],[3,4,2],[3,2,6],[3,6,8],[3,8,9],
+        [4,9,5],[2,4,11],[6,2,10],[8,6,7],[9,8,1]
+      ];
+
+      function normalize(v) {
+        const len = Math.sqrt(v[0]*v[0] + v[1]*v[1] + v[2]*v[2]);
+        return [v[0]/len, v[1]/len, v[2]/len];
+      }
+
+      let verts = icoVerts.map(normalize);
+      let faces = icoFaces;
+
+      // Subdivide 3 times for smooth dome
+      for (let sub = 0; sub < 3; sub++) {
+        const midCache = {};
+        const newFaces = [];
+        function getMid(i, j) {
+          const key = Math.min(i,j) + '_' + Math.max(i,j);
+          if (midCache[key] !== undefined) return midCache[key];
+          const a = verts[i], b = verts[j];
+          const mid = normalize([(a[0]+b[0])/2, (a[1]+b[1])/2, (a[2]+b[2])/2]);
+          const idx = verts.length;
+          verts.push(mid);
+          midCache[key] = idx;
+          return idx;
+        }
+        for (const f of faces) {
+          const a = getMid(f[0], f[1]);
+          const b = getMid(f[1], f[2]);
+          const c = getMid(f[2], f[0]);
+          newFaces.push([f[0], a, c], [f[1], b, a], [f[2], c, b], [a, b, c]);
+        }
+        faces = newFaces;
+      }
+
+      // Filter to upper hemisphere (dome): keep faces where all verts have y > -0.15
+      const domeFaces = faces.filter(f =>
+        verts[f[0]][1] > -0.15 && verts[f[1]][1] > -0.15 && verts[f[2]][1] > -0.15
+      );
+
+      // Collect dome vertex indices and edges
+      const domeVertSet = new Set();
+      const edgeSet = new Set();
+      const edges = [];
+      for (const f of domeFaces) {
+        for (let i = 0; i < 3; i++) {
+          domeVertSet.add(f[i]);
+          const a = f[i], b = f[(i+1)%3];
+          const key = Math.min(a,b) + '_' + Math.max(a,b);
+          if (!edgeSet.has(key)) {
+            edgeSet.add(key);
+            edges.push([a, b]);
+          }
+        }
+      }
+      const domeVerts = Array.from(domeVertSet);
+
+      // Build adjacency graph for pathfinding on the dome mesh
+      const adjacency = {};
+      for (const i of domeVerts) adjacency[i] = [];
+      for (const [a, b] of edges) {
+        adjacency[a].push(b);
+        adjacency[b].push(a);
+      }
+
+      // BFS shortest path on the mesh between two dome vertices
+      function findPath(start, end) {
+        if (start === end) return [start];
+        const visited = new Set([start]);
+        const queue = [[start]];
+        while (queue.length) {
+          const path = queue.shift();
+          const node = path[path.length - 1];
+          for (const neighbor of adjacency[node]) {
+            if (neighbor === end) return [...path, end];
+            if (!visited.has(neighbor)) {
+              visited.add(neighbor);
+              queue.push([...path, neighbor]);
+            }
+          }
+        }
+        return [start, end]; // fallback
+      }
+
+      // Active pulses: each is {path: [...vertIndices], startTime, duration}
+      let activePulses = [];
+      const PULSE_INTERVAL = 5000; // ms between new pulse pairs
+      const PULSE_DURATION = 2500; // ms for a pulse to traverse its path
+      const PULSE_GLOW_RADIUS = 3; // edges around the pulse head that glow
+      let lastPulseTime = -PULSE_INTERVAL; // trigger immediately
+
+      function spawnPulses(time) {
+        // Pick two random dome vertices
+        const a = domeVerts[Math.floor(Math.random() * domeVerts.length)];
+        let b = a;
+        while (b === a) b = domeVerts[Math.floor(Math.random() * domeVerts.length)];
+        const path = findPath(a, b);
+        activePulses.push({ path, startTime: time, duration: PULSE_DURATION });
+        // Second pulse from a different random pair
+        const c = domeVerts[Math.floor(Math.random() * domeVerts.length)];
+        let d = c;
+        while (d === c) d = domeVerts[Math.floor(Math.random() * domeVerts.length)];
+        const path2 = findPath(c, d);
+        activePulses.push({ path: path2, startTime: time + 200, duration: PULSE_DURATION });
+      }
+
+      // For each edge, get the set of vertex indices it connects (for fast lookup)
+      const edgeVertPairs = edges.map(([a, b]) => [a, b]);
+
+      // Rotation helpers
+      function rotY(v, a) {
+        const c = Math.cos(a), s = Math.sin(a);
+        return [v[0]*c + v[2]*s, v[1], -v[0]*s + v[2]*c];
+      }
+      function rotX(v, a) {
+        const c = Math.cos(a), s = Math.sin(a);
+        return [v[0], v[1]*c - v[2]*s, v[1]*s + v[2]*c];
+      }
+
+      // Slerp for curved edges
+      function slerp(a, b, t) {
+        let dot = a[0]*b[0] + a[1]*b[1] + a[2]*b[2];
+        dot = Math.max(-1, Math.min(1, dot));
+        const theta = Math.acos(dot);
+        if (theta < 0.001) {
+          return [a[0]*(1-t)+b[0]*t, a[1]*(1-t)+b[1]*t, a[2]*(1-t)+b[2]*t];
+        }
+        const sinT = Math.sin(theta);
+        const wa = Math.sin((1-t)*theta) / sinT;
+        const wb = Math.sin(t*theta) / sinT;
+        return [a[0]*wa+b[0]*wb, a[1]*wa+b[1]*wb, a[2]*wa+b[2]*wb];
+      }
+
+      // Project with perspective, dome sits in lower half of canvas
+      function project(v) {
+        const persp = 4;
+        const scale = persp / (persp + v[2]);
+        return [
+          v[0] * scale * radius + width / 2,
+          -v[1] * scale * radius + height * 0.58, // flip Y, push dome down
+          v[2]
+        ];
+      }
+
+      const ARC_SEG = 5;
+
+      function draw(time) {
+        ctx.clearRect(0, 0, width, height);
+
+        const aY = time * 0.0001;
+        const aX = 0.45;
+
+        // Spawn new pulse pair every PULSE_INTERVAL
+        if (time - lastPulseTime > PULSE_INTERVAL) {
+          spawnPulses(time);
+          lastPulseTime = time;
+        }
+
+        // Clean up finished pulses (keep a tail fade of 500ms)
+        activePulses = activePulses.filter(p => time - p.startTime < p.duration + 500);
+
+        // Precompute per-vertex pulse glow: how close is each vertex to any active pulse head?
+        const vertexGlow = {};
+        for (const i of domeVerts) vertexGlow[i] = 0;
+
+        for (const pulse of activePulses) {
+          const elapsed = time - pulse.startTime;
+          if (elapsed < 0) continue;
+          const progress = Math.min(elapsed / pulse.duration, 1);
+          const pathLen = pulse.path.length;
+          const exactPos = progress * (pathLen - 1); // fractional index along path
+          const fade = elapsed > pulse.duration ? 1 - (elapsed - pulse.duration) / 500 : 1;
+
+          // Light up vertices near the pulse head position
+          for (let pi = 0; pi < pathLen; pi++) {
+            const dist = Math.abs(pi - exactPos);
+            if (dist < PULSE_GLOW_RADIUS) {
+              const glow = (1 - dist / PULSE_GLOW_RADIUS) * fade;
+              const vi = pulse.path[pi];
+              vertexGlow[vi] = Math.max(vertexGlow[vi], glow);
+            }
+          }
+
+          // Also light up a trailing tail behind the head
+          const tailLen = 6;
+          for (let pi = 0; pi < pathLen; pi++) {
+            const behind = exactPos - pi;
+            if (behind > 0 && behind < tailLen) {
+              const glow = (1 - behind / tailLen) * 0.4 * fade;
+              const vi = pulse.path[pi];
+              vertexGlow[vi] = Math.max(vertexGlow[vi], glow);
+            }
+          }
+        }
+
+        // Draw curved edges
+        ctx.lineCap = 'round';
+        for (let ei = 0; ei < edges.length; ei++) {
+          const [ai, bi] = edges[ei];
+          const va = verts[ai], vb = verts[bi];
+          const pts = [];
+          for (let s = 0; s <= ARC_SEG; s++) {
+            const t = s / ARC_SEG;
+            const interp = slerp(va, vb, t);
+            let r = rotY(interp, aY);
+            r = rotX(r, aX);
+            pts.push(project(r));
+          }
+
+          const avgZ = pts.reduce((sum, p) => sum + p[2], 0) / pts.length;
+          const depthAlpha = 0.06 + (1 - (avgZ + 1) / 2) * 0.28;
+
+          // Pulse glow for this edge = max of its two vertex glows
+          const edgeGlow = Math.max(vertexGlow[ai] || 0, vertexGlow[bi] || 0);
+          const pulseBoost = edgeGlow * edgeGlow * 0.7;
+
+          const alpha = Math.min(1, depthAlpha + pulseBoost);
+          const lw = 0.8 + pulseBoost * 2;
+
+          ctx.lineWidth = lw;
+          ctx.strokeStyle = `rgba(21, 77, 57, ${alpha})`;
+          ctx.beginPath();
+          ctx.moveTo(pts[0][0], pts[0][1]);
+          for (let s = 1; s <= ARC_SEG; s++) {
+            ctx.lineTo(pts[s][0], pts[s][1]);
+          }
+          ctx.stroke();
+        }
+
+        // Draw vertices
+        for (const i of domeVerts) {
+          let r = rotY(verts[i], aY);
+          r = rotX(r, aX);
+          const p = project(r);
+          const depthAlpha = 0.08 + (1 - (p[2] + 1) / 2) * 0.3;
+
+          const glow = vertexGlow[i] || 0;
+          const pulseBoost = glow * glow;
+
+          const alpha = Math.min(1, depthAlpha + pulseBoost * 0.8);
+          const size = 0.6 + (1 - (p[2] + 1) / 2) * 0.6 + pulseBoost * 2.5;
+
+          ctx.fillStyle = `rgba(21, 77, 57, ${alpha})`;
+          ctx.beginPath();
+          ctx.arc(p[0], p[1], size, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
+        requestAnimationFrame(draw);
+      }
+
+      requestAnimationFrame(draw);
+    })();
+
+    // ===== Scroll Reveal =====
+    (function() {
+      const reveals = document.querySelectorAll('.reveal');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, {
+        threshold: 0.15,
+        rootMargin: '0px 0px -40px 0px'
+      });
+
+      reveals.forEach(el => observer.observe(el));
+    })();
+
+    // ===== Nav scroll effect =====
+    (function() {
+      const nav = document.getElementById('nav');
+      let ticking = false;
+      window.addEventListener('scroll', () => {
+        if (!ticking) {
+          requestAnimationFrame(() => {
+            nav.classList.toggle('scrolled', window.scrollY > 60);
+            ticking = false;
+          });
+          ticking = true;
+        }
+      });
+    })();
+
+    // ===== Mobile nav toggle =====
+    (function() {
+      const toggle = document.getElementById('navToggle');
+      const links = document.getElementById('navLinks');
+      toggle.addEventListener('click', () => {
+        links.classList.toggle('open');
+      });
+      links.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => links.classList.remove('open'));
+      });
+    })();
+  </script>
+</body>
+</html>
