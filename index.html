@@ -346,10 +346,16 @@
 
     .about-approach {
       display: flex;
+      flex-wrap: wrap;
       gap: 2rem;
       margin-top: 3rem;
       padding-top: 3rem;
       border-top: 1px solid var(--border);
+    }
+
+    .about-approach > .section-label {
+      width: 100%;
+      margin-bottom: 0;
     }
 
     .about-approach-item {
@@ -917,8 +923,8 @@
           </div>
         </div>
       </div>
-      <p class="section-label reveal" style="transition-delay: 0.25s; margin-top: 4rem;">Research Taste</p>
       <div class="about-approach reveal" style="transition-delay: 0.3s;">
+        <p class="section-label" style="margin-bottom: 2rem;">Research Taste</p>
         <div class="about-approach-item">
           <div class="about-approach-num">01</div>
           <div class="about-approach-title">Conceptually Simple</div>
