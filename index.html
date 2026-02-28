@@ -1433,10 +1433,22 @@
           ctx.fill();
         }
 
-        requestAnimationFrame(draw);
+        if (animating) requestAnimationFrame(draw);
       }
 
-      requestAnimationFrame(draw);
+      // Only animate when hero is visible (saves CPU, improves Core Web Vitals)
+      let animating = false;
+      const heroEl = document.getElementById('hero');
+      const heroObserver = new IntersectionObserver((entries) => {
+        const visible = entries[0].isIntersecting;
+        if (visible && !animating) {
+          animating = true;
+          requestAnimationFrame(draw);
+        } else if (!visible) {
+          animating = false;
+        }
+      }, { threshold: 0 });
+      heroObserver.observe(heroEl);
     })();
 
     // ===== Scroll Reveal =====
