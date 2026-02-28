@@ -31,17 +31,11 @@
     }
 
     :root {
-      --bg-light: #FAFAFA;
-      --bg-dark: #FAFAFA;
-      --bg-card: #EBE3D9;
-      --bg-card-hover: #e0d5c8;
-      --text-primary: #1A1A1A;
-      --text-light: #FAFAFA;
+      --bg: #FAFAFA;
+      --bg-warm: #EBE3D9;
+      --text: #1A1A1A;
       --text-muted: #6E4C4B;
       --accent: #154d39;
-      --accent-light: #1d6b4f;
-      --accent-gold: #154d39;
-      --border: #EBE3D9;
       --font-display: 'Cormorant', Georgia, serif;
       --font-body: 'Karla', -apple-system, sans-serif;
     }
@@ -54,8 +48,8 @@
     body {
       font-family: var(--font-body);
       font-weight: 500;
-      color: var(--text-primary);
-      background: var(--bg-light);
+      color: var(--text);
+      background: var(--bg);
       line-height: 1.7;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
@@ -74,7 +68,7 @@
     }
 
     a:hover {
-      color: var(--accent-light);
+      color: var(--accent);
     }
 
     /* ========== NAVIGATION ========== */
@@ -103,7 +97,7 @@
       font-family: var(--font-display);
       font-size: 1.2rem;
       font-weight: 600;
-      color: var(--text-primary);
+      color: var(--text);
       letter-spacing: 0.04em;
       display: flex;
       align-items: center;
@@ -131,7 +125,7 @@
     }
 
     .nav-links a:hover {
-      color: var(--text-primary);
+      color: var(--text);
     }
 
     .nav-mobile-toggle {
@@ -146,7 +140,7 @@
       display: block;
       width: 22px;
       height: 2px;
-      background: var(--text-primary);
+      background: var(--text);
       margin: 5px 0;
       transition: transform 0.3s ease, opacity 0.3s ease;
     }
@@ -155,7 +149,7 @@
     .hero {
       position: relative;
       min-height: 100vh;
-      background: var(--bg-dark);
+      background: var(--bg);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -195,7 +189,7 @@
       font-weight: 600;
       letter-spacing: 0.25em;
       text-transform: uppercase;
-      color: #975654;
+      color: var(--text-muted);
       margin-bottom: 2rem;
       opacity: 0;
       transform: translateY(20px);
@@ -206,7 +200,7 @@
       font-family: var(--font-display);
       font-size: clamp(3rem, 8vw, 7rem);
       font-weight: 300;
-      color: var(--text-primary);
+      color: var(--text);
       line-height: 1.05;
       letter-spacing: -0.02em;
       margin-bottom: 1.5rem;
@@ -280,12 +274,8 @@
       font-size: clamp(2rem, 4vw, 3.2rem);
       font-weight: 400;
       line-height: 1.2;
-      color: var(--text-primary);
+      color: var(--text);
       margin-bottom: 2rem;
-    }
-
-    .section-heading--light {
-      color: var(--text-primary);
     }
 
     /* Reveal animations */
@@ -303,7 +293,7 @@
 
     /* ========== ABOUT ========== */
     .about {
-      background: var(--bg-light);
+      background: var(--bg);
     }
 
     .about-grid {
@@ -318,7 +308,7 @@
       font-size: clamp(1.6rem, 3vw, 2.2rem);
       font-weight: 400;
       line-height: 1.35;
-      color: var(--text-primary);
+      color: var(--text);
       letter-spacing: -0.01em;
     }
 
@@ -340,7 +330,7 @@
     .about-separator {
       width: 48px;
       height: 1px;
-      background: var(--accent-gold);
+      background: var(--accent);
       margin: 3rem 0;
     }
 
@@ -350,7 +340,7 @@
       gap: 2rem;
       margin-top: 3rem;
       padding-top: 3rem;
-      border-top: 1px solid var(--border);
+      border-top: 1px solid var(--bg-warm);
     }
 
     .about-approach > .section-label {
@@ -366,7 +356,7 @@
       font-family: var(--font-display);
       font-size: 2.5rem;
       font-weight: 300;
-      color: var(--accent-gold);
+      color: var(--accent);
       line-height: 1;
       margin-bottom: 0.75rem;
     }
@@ -386,7 +376,7 @@
 
     /* ========== RESEARCH ========== */
     .research {
-      background: var(--bg-dark);
+      background: var(--bg);
       position: relative;
     }
 
@@ -403,7 +393,7 @@
 
     .research-card {
       background: rgba(0, 0, 0, 0.02);
-      border: 1px solid var(--border);
+      border: 1px solid var(--bg-warm);
       border-radius: 2px;
       padding: 2.5rem 2rem;
       transition: background 0.35s ease, border-color 0.35s ease, transform 0.35s ease;
@@ -418,7 +408,7 @@
       left: 0;
       right: 0;
       height: 2px;
-      background: linear-gradient(90deg, var(--accent), var(--accent-gold));
+      background: linear-gradient(90deg, var(--accent), var(--accent));
       transform: scaleX(0);
       transform-origin: left;
       transition: transform 0.45s cubic-bezier(0.23, 1, 0.32, 1);
@@ -447,7 +437,7 @@
       font-family: var(--font-display);
       font-size: 1.5rem;
       font-weight: 500;
-      color: var(--text-primary);
+      color: var(--text);
       margin-bottom: 1rem;
       line-height: 1.25;
     }
@@ -467,13 +457,13 @@
       font-weight: 600;
       letter-spacing: 0.06em;
       text-transform: uppercase;
-      color: var(--accent-gold);
+      color: var(--accent);
       transition: gap 0.3s ease;
     }
 
     .research-card-link:hover {
       gap: 0.7rem;
-      color: var(--accent-gold);
+      color: var(--accent);
     }
 
     .research-card-link svg {
@@ -483,7 +473,7 @@
 
     /* ========== TEAM ========== */
     .team {
-      background: var(--bg-light);
+      background: var(--bg);
     }
 
     .team-intro {
@@ -528,7 +518,7 @@
     }
 
     .team-name a {
-      color: var(--text-primary);
+      color: var(--text);
       transition: color 0.25s ease;
     }
 
@@ -552,8 +542,8 @@
 
     /* ========== ADVISORS ========== */
     .advisors {
-      background: var(--bg-card);
-      border-top: 1px solid var(--border);
+      background: var(--bg-warm);
+      border-top: 1px solid var(--bg-warm);
     }
 
     .advisors-grid {
@@ -565,8 +555,8 @@
     }
 
     .advisor-card {
-      background: var(--bg-light);
-      border: 1px solid var(--border);
+      background: var(--bg);
+      border: 1px solid var(--bg-warm);
       border-radius: 2px;
       padding: 2.5rem 2rem;
       text-align: center;
@@ -614,7 +604,7 @@
       letter-spacing: 0.05em;
       text-transform: uppercase;
       color: var(--accent);
-      border: 1px solid var(--border);
+      border: 1px solid var(--bg-warm);
       padding: 0.55rem;
       border-radius: 2px;
       transition: all 0.25s ease;
@@ -647,9 +637,9 @@
 
     /* ========== CAREERS CTA ========== */
     .careers {
-      background: var(--bg-light);
+      background: var(--bg);
       text-align: center;
-      border-top: 1px solid var(--border);
+      border-top: 1px solid var(--bg-warm);
     }
 
     .careers-inner {
@@ -693,8 +683,8 @@
     }
 
     .btn--primary:hover {
-      background: var(--accent-light);
-      border-color: var(--accent-light);
+      background: var(--accent);
+      border-color: var(--accent);
       color: #fff;
       transform: translateY(-2px);
       box-shadow: 0 6px 24px rgba(21, 77, 57, 0.35);
@@ -702,7 +692,7 @@
 
     /* ========== FOOTER ========== */
     footer {
-      background: var(--bg-dark);
+      background: var(--bg);
       padding: 4rem 3rem 3rem;
     }
 
@@ -716,14 +706,14 @@
       justify-content: space-between;
       align-items: start;
       padding-bottom: 3rem;
-      border-bottom: 1px solid var(--border);
+      border-bottom: 1px solid var(--bg-warm);
     }
 
     .footer-brand {
       font-family: var(--font-display);
       font-size: 1.5rem;
       font-weight: 500;
-      color: var(--text-primary);
+      color: var(--text);
       margin-bottom: 0.75rem;
     }
 
@@ -742,7 +732,7 @@
       width: 40px;
       height: 40px;
       border-radius: 50%;
-      border: 1px solid var(--border);
+      border: 1px solid var(--bg-warm);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -751,8 +741,8 @@
     }
 
     .footer-social-link:hover {
-      border-color: var(--accent-gold);
-      color: var(--accent-gold);
+      border-color: var(--accent);
+      color: var(--accent);
     }
 
     .footer-social-link svg {
@@ -774,7 +764,7 @@
     }
 
     .footer-bottom a:hover {
-      color: var(--text-primary);
+      color: var(--text);
     }
 
     /* ========== ANIMATIONS ========== */
