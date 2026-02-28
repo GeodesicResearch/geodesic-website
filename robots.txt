@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://geodesicresearch.github.io/geodesic-website/sitemap.xml
