@@ -59,6 +59,7 @@
       {"@type": "Person", "name": "Puria Radmard", "jobTitle": "Co-Director and Co-Founder"},
       {"@type": "Person", "name": "Cameron Tice", "jobTitle": "Co-Director and Co-Founder"},
       {"@type": "Person", "name": "Alexandra Narin", "jobTitle": "Strategic Delivery"},
+      {"@type": "Person", "name": "Edward Young", "jobTitle": "Founding Member of Technical Staff"},
       {"@type": "Person", "name": "Kyle O'Brien", "jobTitle": "Founding Member of Technical Staff"}
     ]
   }
@@ -531,9 +532,14 @@
     }
 
     .team-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
       gap: 2.5rem;
+    }
+
+    .team-member {
+      width: calc(33.333% - 1.67rem);
     }
 
     .team-member {
@@ -594,9 +600,9 @@
 
     .advisors-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(3, 1fr);
       gap: 2.5rem;
-      max-width: 600px;
+      max-width: 900px;
       margin: 3rem auto 0;
     }
 
@@ -877,8 +883,11 @@
         grid-template-columns: 1fr;
       }
 
+      .team-member {
+        width: 100%;
+      }
+
       .team-grid {
-        grid-template-columns: 1fr;
         gap: 2rem;
       }
 
@@ -905,7 +914,6 @@
       }
 
       .team-grid {
-        grid-template-columns: 1fr;
         gap: 1.5rem;
       }
     }
@@ -920,7 +928,7 @@
       <li><a href="#about">About</a></li>
       <li><a href="#research">Research</a></li>
       <li><a href="#team">Team</a></li>
-      <li><a href="#advisors">Advisors</a></li>
+      <li><a href="#advisors">Mentors</a></li>
       <li><a href="#careers">Careers</a></li>
     </ul>
     <button class="nav-mobile-toggle" id="navToggle" aria-label="Toggle navigation">
@@ -1036,6 +1044,20 @@
           <p class="team-bio">Cofounder of UK AI Forum. Previously, a Neuroscience researcher at UCL and the Head of Grants for a Biotech company where she secured and managed over $5M in private and government funding. Alexandra is applying her experience to scaling Geodesic.</p>
         </div>
         <div class="team-member reveal" style="transition-delay: 0.35s;">
+          <div class="team-avatar"><img src="images/edward-young.jpg" alt="Edward Young, Founding Member of Technical Staff at Geodesic Research" loading="lazy" width="400" height="400"></div>
+          <div class="team-name">Edward Young</div>
+          <div class="team-role">Founding Member of Technical Staff</div>
+          <p class="team-bio">Helped found and secure initial funding for Geodesic Research, and co-mentored Geodesic's initial MARS cohort. Previously a researcher in the UK AI Security Institute's Safeguards team. Completed a PhD in computational neuroscience at the University of Cambridge Engineering Department.</p>
+        </div>
+        <!--
+        <div class="team-member reveal" style="transition-delay: 0.4s;">
+          <div class="team-avatar"><img src="images/nathalie-kirch.jpeg" alt="Nathalie Kirch, Member of Technical Staff at Geodesic Research" loading="lazy" width="400" height="400"></div>
+          <div class="team-name"><a href="https://safeandtrustedai.org/person/nathalie-kirch/">Nathalie Kirch</a></div>
+          <div class="team-role">Member of Technical Staff</div>
+          <p class="team-bio">PhD student in computer science at Imperial College London and King's College London, researching mechanistic interpretability and robustness in LLMs. Previously a MATS Research Scholar, LASR fellow, and ERA:AI fellow.</p>
+        </div>
+        -->
+        <div class="team-member reveal" style="transition-delay: 0.4s;">
           <div class="team-avatar"><img src="images/kyle-obrien.jpg" alt="Kyle O'Brien, Founding Member of Technical Staff at Geodesic Research" loading="lazy" width="400" height="400"></div>
           <div class="team-name"><a href="https://kyleobrien.io">Kyle O'Brien</a></div>
           <div class="team-role">Founding Member of Technical Staff</div>
@@ -1045,10 +1067,10 @@
     </div>
   </section>
 
-  <!-- Advisors -->
+  <!-- Mentors -->
   <section class="section advisors" id="advisors">
     <div class="section-inner">
-      <p class="section-label reveal">Advisors</p>
+      <p class="section-label reveal">Mentors</p>
       <h2 class="section-heading reveal" style="transition-delay: 0.1s;">Guided by leading researchers</h2>
       <div class="advisors-grid">
         <!--
@@ -1092,7 +1114,6 @@
             <a href="https://www.lesswrong.com/users/cloud-1" target="_blank" rel="noopener" class="advisor-link" aria-label="LessWrong"><svg viewBox="0 0 100 100" fill="currentColor"><path d="M29.1,29.2l6.4,11.6l4.3-0.8l0.8-4.3L29.1,29.2z M40.7,64.5l-0.8-4.3l-4.3-0.8L29.2,71L40.7,64.5z M70.9,70.9l-6.4-11.6l-4.3,0.8l-0.8,4.3L70.9,70.9z M64.4,40.8l6.4-11.6l-11.6,6.4l0.8,4.3L64.4,40.8z M67.4,58.8l10.8,19.4L58.8,67.4L50,98.8l-8.8-31.4L21.9,78.2l10.8-19.4L1.2,50.1l31.4-8.8L21.9,21.9l19.4,10.8L50,1.3l8.8,31.4l19.4-10.8L67.4,41.3L98.8,50L67.4,58.8zM57.7,57.8L83.5,50L50,50.1l7.7-7.7L50,16.6v33.5l-7.7-7.7l-25.8,7.7H50l-7.7,7.7L50,83.5V50.1L57.7,57.8z"/></svg></a>
           </div>
         </div>
-        <!--
         <div class="advisor-card reveal" style="transition-delay: 0.45s;">
           <div class="advisor-avatar"><img src="images/david-africa.jpg" alt="David Demitri Africa"></div>
           <div class="advisor-name">David Demitri Africa</div>
@@ -1107,7 +1128,6 @@
             <a href="https://www.lesswrong.com/users/david-africa" target="_blank" rel="noopener" class="advisor-link" aria-label="LessWrong"><svg viewBox="0 0 100 100" fill="currentColor"><path d="M29.1,29.2l6.4,11.6l4.3-0.8l0.8-4.3L29.1,29.2z M40.7,64.5l-0.8-4.3l-4.3-0.8L29.2,71L40.7,64.5z M70.9,70.9l-6.4-11.6l-4.3,0.8l-0.8,4.3L70.9,70.9z M64.4,40.8l6.4-11.6l-11.6,6.4l0.8,4.3L64.4,40.8z M67.4,58.8l10.8,19.4L58.8,67.4L50,98.8l-8.8-31.4L21.9,78.2l10.8-19.4L1.2,50.1l31.4-8.8L21.9,21.9l19.4,10.8L50,1.3l8.8,31.4l19.4-10.8L67.4,41.3L98.8,50L67.4,58.8zM57.7,57.8L83.5,50L50,50.1l7.7-7.7L50,16.6v33.5l-7.7-7.7l-25.8,7.7H50l-7.7,7.7L50,83.5V50.1L57.7,57.8z"/></svg></a>
           </div>
         </div>
-        -->
       </div>
     </div>
   </section>
