@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Geodesic Research | The shortest path to impact</title>
-  <meta name="description" content="Geodesic Research is a UK-based AI safety organisation pioneering alignment and control pretraining. Founded at the University of Cambridge, we research whether safety can be an end-to-end strategy in model training.">
+  <meta name="description" content="Geodesic Research is a UK-based AI safety organisation building robust initialisations for alignment. Founded in Cambridge, we design pre- and midtraining interventions that hold up under capabilities reinforcement learning—a critical and underexplored threat to alignment.">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://geodesicresearch.ai/">
 
@@ -12,7 +12,7 @@
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Geodesic Research">
   <meta property="og:title" content="Geodesic Research | AI Safety Research in Cambridge, UK">
-  <meta property="og:description" content="Pioneering alignment and control pretraining research. We're building the science of whether safety can be an end-to-end strategy throughout model training.">
+  <meta property="og:description" content="Building robust initialisations for alignment. We design pre- and midtraining interventions that hold up under capabilities reinforcement learning—a critical and underexplored threat to alignment.">
   <meta property="og:image" content="https://geodesicresearch.ai/images/preview.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -21,7 +21,7 @@
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Geodesic Research | AI Safety Research in Cambridge, UK">
-  <meta name="twitter:description" content="Pioneering alignment and control pretraining research. We're building the science of whether safety can be an end-to-end strategy throughout model training.">
+  <meta name="twitter:description" content="Building robust initialisations for alignment. We design pre- and midtraining interventions that hold up under capabilities reinforcement learning—a critical and underexplored threat to alignment.">
   <meta name="twitter:image" content="https://geodesicresearch.ai/images/preview.jpg">
 
   <!-- Structured Data -->
@@ -33,7 +33,7 @@
     "alternateName": "Geodesic",
     "url": "https://geodesicresearch.ai/",
     "logo": "https://geodesicresearch.ai/images/logo.png",
-    "description": "A UK-based technical AI safety organisation focused on compute-intensive alignment research, pioneering alignment and control pretraining.",
+    "description": "A UK-based technical AI safety organisation focused on compute-intensive alignment research, building robust initialisations for alignment that hold up under capabilities reinforcement learning.",
     "foundingLocation": {
       "@type": "Place",
       "name": "Cambridge, United Kingdom",
@@ -54,10 +54,10 @@
       "https://www.linkedin.com/company/geodesic-research",
       "https://www.geodesicresearch.org"
     ],
-    "knowsAbout": ["AI Safety", "Alignment Pretraining", "Control Pretraining", "Machine Learning Safety"],
+    "knowsAbout": ["AI Safety", "Alignment Pretraining", "Robust Alignment Initialisations", "Capabilities Reinforcement Learning", "Machine Learning Safety"],
     "member": [
-      {"@type": "Person", "name": "Puria Radmard", "jobTitle": "Co-Director and Co-Founder"},
-      {"@type": "Person", "name": "Cameron Tice", "jobTitle": "Co-Director and Co-Founder"},
+      {"@type": "Person", "name": "Puria Radmard", "jobTitle": "Co-Founder and Technical Director"},
+      {"@type": "Person", "name": "Cameron Tice", "jobTitle": "Co-Founder and Executive Director"},
       {"@type": "Person", "name": "Alexandra Narin", "jobTitle": "Head of Operations"},
       {"@type": "Person", "name": "Edward Young", "jobTitle": "Founding Member of Technical Staff"},
       {"@type": "Person", "name": "Nathalie Kirch", "jobTitle": "(Incoming) Member of Technical Staff"},
@@ -610,7 +610,7 @@
     .advisor-card {
       background: var(--bg);
       border: 1px solid var(--bg-warm);
-      border-radius: 2px;
+      border-radius: 12px;
       padding: 2.5rem 2rem;
       text-align: center;
       transition: transform 0.35s ease, box-shadow 0.35s ease;
@@ -965,12 +965,12 @@
       <p class="section-label reveal">About Us</p>
       <div class="about-grid">
         <div class="reveal" style="transition-delay: 0.1s;">
-          <h2 class="about-statement">We are building the science of <em>alignment and control pretraining</em>&mdash;determining whether safety can be an end-to-end strategy throughout model training.</h2>
+          <h2 class="about-statement">We build <em>robust initialisations for alignment</em>&mdash;base models shaped through pre- and midtraining to hold up under capabilities reinforcement learning.</h2>
         </div>
         <div class="reveal" style="transition-delay: 0.2s;">
           <div class="about-body">
-            <p>Geodesic Research is a UK-based technical AI Safety organisation focused on compute-intensive alignment research. While there is an established science of pretraining's influence on capabilities, no such science exists for safety. We aim to change that.</p>
-            <p>Our purpose is two-fold: to explore scalable pretraining approaches we have reason to believe are not yet standard practice, and to facilitate adoption of any promising techniques we develop. We will consider Geodesic successful if we determine that pretraining has no obvious impact on safety&mdash;or if we determine that pretraining interventions are viable and facilitate their adoption across the industry.</p>
+            <p>Geodesic Research is a UK-based technical AI safety organisation focused on compute-intensive alignment research. Our <a href="https://alignmentpretraining.ai/" target="_blank" rel="noopener">seminal work on alignment pretraining</a> showed that you can bake alignment priors into base models, and the broader field is now converging on the approach.</p>
+            <p>Long-horizon capabilities reinforcement learning is emerging as a critical and underexplored threat to alignment&mdash;degrading alignment properties across evals and selecting for behaviours like metagaming, sycophancy, and reward hacking. Our agenda is to design midtraining and early post-training interventions that create initialisations where alignment persists through the rest of training.</p>
           </div>
         </div>
       </div>
@@ -979,17 +979,17 @@
         <div class="about-approach-item">
           <div class="about-approach-num">01</div>
           <div class="about-approach-title">Conceptually Simple</div>
-          <div class="about-approach-desc">We focus on conceptually simple interventions&mdash;such as data insertion and filtering&mdash;that benefit from scale and span the full training stack. Just as labs curate pretraining data for capabilities like reasoning, we believe they should also curate for alignment.</div>
+          <div class="about-approach-desc">We focus on conceptually simple, data-centric interventions&mdash;document mixes, filtering, declarative midtraining&mdash;that benefit from scale and slot into existing training pipelines without bespoke infrastructure.</div>
         </div>
         <div class="about-approach-item">
           <div class="about-approach-num">02</div>
           <div class="about-approach-title">Uniquely Positioned</div>
-          <div class="about-approach-desc">We believe we are uniquely well-positioned to pursue alignment pretraining research. Our team has experience pretraining LLMs from scratch, with established relationships across the open-source and frontier AI communities. We also have ample compute access, enabling us to train larger models and establish scaling trends.</div>
+          <div class="about-approach-desc">Philanthropic funding from Coefficient Giving and a compute partnership with the UK AI Security Institute put us among the few non-lab actors who can replicate the full midtraining, SFT, and RL stack at scale. We have no commercial stake in any particular alignment method, leaving us free to investigate the full picture.</div>
         </div>
         <div class="about-approach-item">
           <div class="about-approach-num">03</div>
           <div class="about-approach-title">Frontier Impact</div>
-          <div class="about-approach-desc">Our aim is for our research to be useful at scale. We develop interventions that can be slotted into existing training pipelines without harming general capabilities. Our target audience is model training teams at frontier labs, and we aim to establish scaling trends that demonstrate our interventions are production-ready for the frontier.</div>
+          <div class="about-approach-desc">Our target audience is model training teams at frontier labs. We design interventions that can be profiled, packaged, and handed off&mdash;taking the shortest path to advising on their production training stacks.</div>
         </div>
       </div>
     </div>
@@ -998,13 +998,13 @@
   <!-- Research -->
   <section class="section research" id="research">
     <div class="section-inner">
-      <p class="section-label reveal">Current Directions</p>
-      <h2 class="section-heading reveal" style="transition-delay: 0.1s;">Can alignment and control be<br>end-to-end strategies?</h2>
+      <p class="section-label reveal">Representative Directions</p>
+      <h2 class="section-heading reveal" style="transition-delay: 0.1s;">Can alignment hold up<br>through capabilities RL?</h2>
       <div class="research-grid">
         <div class="research-card reveal" style="transition-delay: 0.15s;">
           <div class="research-card-num">01</div>
-          <div class="research-card-title">Scaling Alignment Pretraining</div>
-          <div class="research-card-desc">Our first paper found that AI discourse causes self-fulfilling (mis)alignment. We are now scaling our experimental setup to include reasoning models, agentic misalignment evaluations, and larger training datasets to determine whether alignment pretraining is production-ready.</div>
+          <div class="research-card-title">Alignment Pretraining</div>
+          <div class="research-card-desc">Our seminal work showed that AI discourse causes self-fulfilling (mis)alignment&mdash;and that you can shape these priors during pretraining. Frontier labs are now converging on this approach: Anthropic's recent Teaching Claude Why and Model Spec Midtraining both lean on the alignment-priors framing we pioneered.</div>
           <a href="https://alignmentpretraining.ai" target="_blank" rel="noopener" class="research-card-link">
             Learn more
             <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 12L12 4M12 4H5M12 4v7"/></svg>
@@ -1012,13 +1012,13 @@
         </div>
         <div class="research-card reveal" style="transition-delay: 0.25s;">
           <div class="research-card-num">02</div>
-          <div class="research-card-title">Inoculation Midtraining</div>
-          <div class="research-card-desc">Post-training can inadvertently reinforce misaligned behaviour that generalises broadly. We will craft declarative persona descriptions during midtraining to inoculate models against emergent misalignment&mdash;shaping not just what a persona defaults to, but how it generalises under distributional shift.</div>
+          <div class="research-card-title">Misalignment Quarantining</div>
+          <div class="research-card-desc">Post-training on imperfect data can broadly corrupt a base model's alignment. We will explore shaping base models with declarative midtraining documents that aim to establish an explicit context boundary around unsafe behaviour&mdash;so that benign features might generalise while the misalignment underneath stays quarantined.</div>
         </div>
         <div class="research-card reveal" style="transition-delay: 0.35s;">
           <div class="research-card-num">03</div>
-          <div class="research-card-title">Control Pretraining</div>
-          <div class="research-card-desc">Base models already understand concepts like alignment faking and monitoring. We will explore shaping this knowledge during pretraining&mdash;reducing the likelihood that misaligned AIs possess knowledge differentially useful for circumventing control protocols, strategy sandbagging, or dangerous technical capabilities.</div>
+          <div class="research-card-title">Adversarial Robustness to Capabilities RL</div>
+          <div class="research-card-desc">Long-horizon capabilities RL may degrade alignment in ways pretraining alone cannot prevent. We will stress-test midtraining and early post-training interventions against agentic RL with misspecified rewards&mdash;aiming to surface which methods could produce truly robust initialisations and which might break down under pressure.</div>
         </div>
       </div>
     </div>
@@ -1031,15 +1031,15 @@
       <h2 class="section-heading reveal" style="transition-delay: 0.1s;">Founded in Cambridge, UK</h2>
       <div class="team-grid">
         <div class="team-member reveal" style="transition-delay: 0.2s;">
-          <div class="team-avatar"><img src="images/puria-radmard.jpg" alt="Puria Radmard, Co-Director and Co-Founder of Geodesic Research" loading="lazy" width="400" height="400"></div>
+          <div class="team-avatar"><img src="images/puria-radmard.jpg" alt="Puria Radmard, Co-Founder and Technical Director of Geodesic Research" loading="lazy" width="400" height="400"></div>
           <div class="team-name"><a href="https://scholar.google.com/citations?user=O3Lza0oAAAAJ&hl=en">Puria Radmard</a></div>
-          <div class="team-role">Founder &amp; Co-Director</div>
+          <div class="team-role">Co-Founder &amp; Technical Director</div>
           <p class="team-bio">PhD student in theoretical neuroscience at the University of Cambridge. Led Geodesic's early work on steganography. Former ERA:AI fellow. Previously a machine learning engineer at raft.ai and a private equity quantitative strategist at Goldman Sachs.</p>
         </div>
         <div class="team-member reveal" style="transition-delay: 0.25s;">
-          <div class="team-avatar"><img src="images/cameron-tice.jpg" alt="Cameron Tice, Co-Director and Co-Founder of Geodesic Research" loading="lazy" width="400" height="400"></div>
+          <div class="team-avatar"><img src="images/cameron-tice.jpg" alt="Cameron Tice, Co-Founder and Executive Director of Geodesic Research" loading="lazy" width="400" height="400"></div>
           <div class="team-name"><a href="https://scholar.google.com/citations?user=TLv11yEAAAAJ&hl=en">Cameron Tice</a></div>
-          <div class="team-role">Founder &amp; Co-Director</div>
+          <div class="team-role">Co-Founder &amp; Executive Director</div>
           <p class="team-bio">Marshall Scholar at the University of Cambridge, where he completed his MPhil on automated research with LLMs for computational psychiatry. Lead author of Noise Injection for Sandbagging Detection and a former Research Manager for the ERA:AI fellowship.</p>
         </div>
         <div class="team-member reveal" style="transition-delay: 0.3s;">
