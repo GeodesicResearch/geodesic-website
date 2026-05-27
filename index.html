@@ -509,6 +509,43 @@
       height: 14px;
     }
 
+    /* ========== PAPERS COLUMNS ========== */
+    .papers-columns {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: stretch;
+    }
+
+    .papers-column {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .papers-column .papers-list {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .papers-column .papers-list .research-card {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .papers-column .papers-list .research-card .research-card-link {
+      margin-top: auto;
+      padding-top: 1.5rem;
+    }
+
+    @media (max-width: 768px) {
+      .papers-columns {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+    }
+
     /* ========== TEAM ========== */
     .team {
       background: var(--bg);
@@ -1018,14 +1055,30 @@
   <!-- Papers -->
   <section class="section papers" id="papers">
     <div class="section-inner">
-      <p class="section-label reveal">Key Papers</p>
-      <div class="papers-list">
-        <div class="research-card reveal" style="transition-delay: 0.15s; max-width: 680px;">
-          <div class="research-card-title">Alignment Pretraining: AI Discourse Causes Self-Fulfilling (Mis)alignment</div>
-          <a href="https://alignmentpretraining.ai/" target="_blank" rel="noopener" class="research-card-link">
-            Read paper
-            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 12L12 4M12 4H5M12 4v7"/></svg>
-          </a>
+      <div class="papers-columns">
+        <div class="papers-column">
+          <p class="section-label reveal">Key Papers</p>
+          <div class="papers-list">
+            <div class="research-card reveal" style="transition-delay: 0.15s;">
+              <div class="research-card-title">Alignment Pretraining: AI Discourse Causes Self-Fulfilling (Mis)alignment</div>
+              <a href="https://alignmentpretraining.ai/" target="_blank" rel="noopener" class="research-card-link">
+                Read paper
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 12L12 4M12 4H5M12 4v7"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="papers-column">
+          <p class="section-label reveal" style="transition-delay: 0.1s;">Blog Posts</p>
+          <div class="papers-list">
+            <div class="research-card reveal" style="transition-delay: 0.25s;">
+              <div class="research-card-title">Announcing Geodesic Research</div>
+              <a href="https://www.lesswrong.com/posts/xBbYGer8w45kxkaWr/announcing-geodesic-research" target="_blank" rel="noopener" class="research-card-link">
+                Read post
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 12L12 4M12 4H5M12 4v7"/></svg>
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </div>
