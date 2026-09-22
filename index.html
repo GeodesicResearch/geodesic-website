@@ -413,6 +413,16 @@
       line-height: 1.65;
     }
 
+    a.about-approach-link {
+      display: block;
+      color: inherit;
+      transition: color 0.25s ease;
+    }
+
+    a.about-approach-link:hover .about-approach-title {
+      color: var(--accent);
+    }
+
     /* ========== RESEARCH ========== */
     .research {
       background: var(--bg);
@@ -1022,8 +1032,10 @@
         </div>
         <div class="about-approach-item">
           <div class="about-approach-num">02</div>
-          <div class="about-approach-title">Uniquely Positioned</div>
-          <div class="about-approach-desc">Philanthropic funding from Coefficient Giving and a compute partnership with the UK AI Security Institute put us among the few non-lab actors who can replicate the full midtraining, SFT, and RL stack at scale. We have no commercial stake in any particular alignment method, leaving us free to investigate the full picture.</div>
+          <a href="https://www.lesswrong.com/posts/aCGx79eGafwDcXEgf/reducing-the-resource-gap-between-lab-and-external-safety" target="_blank" rel="noopener" class="about-approach-link">
+            <div class="about-approach-title">Uniquely Positioned</div>
+            <div class="about-approach-desc">Philanthropic funding from Coefficient Giving and a compute partnership with the UK AI Security Institute put us among the few non-lab actors who can replicate the full midtraining, SFT, and RL stack at scale. We have no commercial stake in any particular alignment method, leaving us free to investigate the full picture.</div>
+          </a>
         </div>
         <div class="about-approach-item">
           <div class="about-approach-num">03</div>
