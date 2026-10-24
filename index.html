@@ -532,82 +532,124 @@
     }
 
     /* ========== WRITING FEED ========== */
-    .writing .section-label {
-      margin-bottom: 1.5rem;
-    }
-
     .writing-feed {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 3rem 2.5rem;
-      padding-top: 8px;
+      display: flex;
+      flex-direction: column;
     }
 
     .writing-item {
       position: relative;
+      display: grid;
+      grid-template-columns: 9.5rem minmax(0, 1fr) auto;
+      gap: 0 2.5rem;
+      align-items: start;
+      padding: 2rem 0;
+      border-top: 1px solid var(--bg-warm);
+    }
+
+    .writing-item:last-child {
+      border-bottom: 1px solid var(--bg-warm);
+    }
+
+    .writing-meta {
       display: flex;
       flex-direction: column;
-      padding-top: 1.75rem;
-      border-top: 1px solid var(--bg-warm);
-      color: var(--text);
-    }
-
-    .writing-item::before {
-      content: '';
-      position: absolute;
-      top: -4px;
-      left: 0;
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: var(--bg);
-      border: 1px solid var(--accent);
-      transition: background 0.25s ease;
-    }
-
-    .writing-item:hover::before,
-    .writing-item:focus-visible::before {
-      background: var(--accent);
-    }
-
-    .writing-item:hover,
-    .writing-item:focus-visible {
-      color: var(--text);
-    }
-
-    .writing-item:focus-visible {
-      outline: 2px solid var(--accent);
-      outline-offset: 6px;
+      align-items: flex-start;
+      gap: 0.5rem;
+      padding-top: 0.35rem;
     }
 
     .writing-date {
-      font-size: 0.82rem;
+      font-size: 0.85rem;
       color: var(--text-muted);
-      margin-bottom: 0.6rem;
+    }
+
+    .writing-tag {
+      font-size: 0.75rem;
+      font-weight: 600;
+      line-height: 1;
+      padding: 0.3rem 0.65rem;
+      border: 1px solid var(--accent);
+      border-radius: 999px;
+      color: var(--accent);
     }
 
     .writing-title {
       font-family: var(--font-display);
-      font-size: 1.55rem;
+      font-size: clamp(1.45rem, 2.4vw, 1.85rem);
       font-weight: 500;
       line-height: 1.25;
-      margin-bottom: 1rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .writing-title a {
+      color: var(--text);
       text-decoration: underline;
       text-decoration-color: transparent;
       text-underline-offset: 0.2em;
       transition: text-decoration-color 0.25s ease;
     }
 
-    .writing-item:hover .writing-title,
-    .writing-item:focus-visible .writing-title {
+    .writing-title a::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+    }
+
+    .writing-item:hover .writing-title a,
+    .writing-title a:focus-visible {
       text-decoration-color: var(--accent);
     }
 
+    .writing-title a:focus-visible {
+      outline: none;
+    }
+
+    .writing-item:has(.writing-title a:focus-visible) {
+      outline: 2px solid var(--accent);
+      outline-offset: -2px;
+    }
+
     .writing-by {
-      margin-top: auto;
-      font-size: 0.85rem;
-      line-height: 1.5;
+      font-size: 0.92rem;
+      line-height: 1.55;
+      max-width: 62ch;
+    }
+
+    .writing-aff {
+      font-size: 0.82rem;
+      line-height: 1.55;
       color: var(--text-muted);
+      margin-top: 0.15rem;
+    }
+
+    .writing-by sup,
+    .writing-aff sup {
+      font-size: 0.65em;
+      line-height: 0;
+    }
+
+    .writing-artifact {
+      position: relative;
+      z-index: 1;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding-top: 0.45rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--accent);
+    }
+
+    .writing-artifact svg {
+      width: 16px;
+      height: 16px;
+      flex: none;
+    }
+
+    .writing-artifact:hover {
+      text-decoration: underline;
+      text-underline-offset: 0.2em;
     }
 
     /* ========== TEAM ========== */
@@ -930,10 +972,6 @@
 
     /* ========== RESPONSIVE ========== */
     @media (max-width: 1024px) {
-      .writing-feed {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
       .research-grid {
         grid-template-columns: 1fr 1fr;
       }
@@ -944,9 +982,21 @@
     }
 
     @media (max-width: 768px) {
-      .writing-feed {
+      .writing-item {
         grid-template-columns: 1fr;
-        gap: 2.25rem;
+        gap: 0.9rem;
+        padding: 1.5rem 0;
+      }
+
+      .writing-meta {
+        flex-direction: row;
+        align-items: center;
+        gap: 0.9rem;
+        padding-top: 0;
+      }
+
+      .writing-artifact {
+        padding-top: 0.25rem;
       }
 
       .section {
@@ -1041,7 +1091,6 @@
     <ul class="nav-links" id="navLinks">
       <li><a href="#about">About</a></li>
       <li><a href="#research">Research</a></li>
-      <li><a href="#writing">Writing</a></li>
       <li><a href="#team">Team</a></li>
       <li><a href="#advisors">Mentors</a></li>
       <li><a href="#careers">Careers</a></li>
@@ -1112,6 +1161,7 @@
     <div class="section-inner">
       <p class="section-label reveal">Research Directions</p>
       <h2 class="section-heading reveal" style="transition-delay: 0.1s;">Can alignment hold up<br>through capabilities RL?</h2>
+      <!-- Research priority cards, hidden in favour of the post feed below:
       <div class="research-grid">
         <div class="research-card reveal" style="transition-delay: 0.15s;">
           <div class="research-card-num">01</div>
@@ -1137,55 +1187,99 @@
           <div class="research-card-desc">Long-horizon capabilities RL may degrade alignment in ways pretraining alone cannot prevent. We will stress-test midtraining and early post-training interventions against agentic RL with misspecified rewards&mdash;aiming to surface which methods could produce truly robust initialisations and which might break down under pressure.</div>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- Writing -->
-  <section class="section writing" id="writing">
-    <div class="section-inner">
-      <p class="section-label reveal">Writing on LessWrong</p>
-      <div class="writing-feed reveal" id="writingFeed" style="transition-delay: 0.1s;">
+      -->
+      <div class="writing-feed reveal" id="writing" style="transition-delay: 0.15s;">
           <!-- writing-feed:start -->
-          <a class="writing-item" href="https://www.lesswrong.com/posts/HwdXDoCH7KXdKsz7k/research-note-filtering-subversion-relevant-information-from" target="_blank" rel="noopener">
-            <time class="writing-date" datetime="2026-10-05">Oct 5, 2026</time>
-            <span class="writing-title">Research Note: Filtering Subversion-Relevant Information From Pretraining Data Is Feasible</span>
-            <span class="writing-by">Kyle O&rsquo;Brien, Spencer Kitts, Cam and Alek Westover</span>
-          </a>
-          <a class="writing-item" href="https://www.lesswrong.com/posts/FogmcDHA6AdMGukum/alignment-engineering-vs-misalignment-science" target="_blank" rel="noopener">
-            <time class="writing-date" datetime="2026-10-05">Oct 5, 2026</time>
-            <span class="writing-title">&ldquo;Alignment Engineering&rdquo; vs. &ldquo;Misalignment Science&rdquo;</span>
-            <span class="writing-by">Edward James Young</span>
-          </a>
-          <a class="writing-item" href="https://www.lesswrong.com/posts/aCGx79eGafwDcXEgf/reducing-the-resource-gap-between-lab-and-external-safety" target="_blank" rel="noopener">
-            <time class="writing-date" datetime="2026-09-16">Sep 16, 2026</time>
-            <span class="writing-title">Reducing the Resource Gap Between Lab and External Safety Researchers</span>
-            <span class="writing-by">Alexandra Narin, Kyle O&rsquo;Brien and Puria</span>
-          </a>
-          <a class="writing-item" href="https://www.lesswrong.com/posts/o4Jmyn25TWm8jRAy8/inoculation-midtraining-with-learned-neologisms" target="_blank" rel="noopener">
-            <time class="writing-date" datetime="2026-09-15">Sep 15, 2026</time>
-            <span class="writing-title">Inoculation Midtraining with Learned Neologisms</span>
-            <span class="writing-by">Kyle O&rsquo;Brien, Edward James Young and 5 others</span>
-          </a>
-          <a class="writing-item" href="https://www.lesswrong.com/posts/5KHLQkW8M87FzbM5a/why-study-proto-training-gaming-as-an-adversarial-alignment" target="_blank" rel="noopener">
-            <time class="writing-date" datetime="2026-07-08">Jul 8, 2026</time>
-            <span class="writing-title">Why study proto-training gaming as an adversarial alignment failure mode?</span>
-            <span class="writing-by">Puria, Edward James Young and Cam</span>
-          </a>
-          <a class="writing-item" href="https://www.lesswrong.com/posts/nhjkHsppEk98xxmPe/why-study-alignment-interventions-on-pre-rl-checkpoints" target="_blank" rel="noopener">
-            <time class="writing-date" datetime="2026-07-08">Jul 8, 2026</time>
-            <span class="writing-title">Why study alignment interventions on pre-RL checkpoints?</span>
-            <span class="writing-by">Edward James Young, Puria and Cam</span>
-          </a>
-          <a class="writing-item" href="https://www.lesswrong.com/posts/xBbYGer8w45kxkaWr/announcing-geodesic-research" target="_blank" rel="noopener">
-            <time class="writing-date" datetime="2026-05-27">May 27, 2026</time>
-            <span class="writing-title">Announcing Geodesic Research</span>
-            <span class="writing-by">Puria, Cam and 3 others</span>
-          </a>
-          <a class="writing-item" href="https://www.lesswrong.com/posts/TcfyGD2aKdZ7Rt3hk/alignment-pretraining-ai-discourse-causes-self-fulfilling" target="_blank" rel="noopener">
-            <time class="writing-date" datetime="2025-12-21">Dec 21, 2025</time>
-            <span class="writing-title">Alignment Pretraining: AI Discourse Causes Self-Fulfilling (Mis)alignment</span>
-            <span class="writing-by">Cam, Puria and 4 others</span>
-          </a>
+          <article class="writing-item">
+            <div class="writing-meta">
+              <time class="writing-date" datetime="2026-10-05">Oct 5, 2026</time>
+              <span class="writing-tag">Empirics</span>
+            </div>
+            <div class="writing-main">
+              <h3 class="writing-title"><a href="https://www.lesswrong.com/posts/HwdXDoCH7KXdKsz7k/research-note-filtering-subversion-relevant-information-from" target="_blank" rel="noopener">Research Note: Filtering Subversion-Relevant Information From Pretraining Data Is Feasible</a></h3>
+              <p class="writing-by">Kyle O&rsquo;Brien<sup>1</sup>, Spencer Kitts<sup>2</sup>, Cameron Tice<sup>1</sup> and Alek Westover<sup>2</sup></p>
+              <p class="writing-aff"><sup>1</sup>&thinsp;Geodesic Research; <sup>2</sup>&thinsp;Redwood Research</p>
+            </div>
+          </article>
+          <article class="writing-item">
+            <div class="writing-meta">
+              <time class="writing-date" datetime="2026-10-05">Oct 5, 2026</time>
+              <span class="writing-tag">Strategy</span>
+            </div>
+            <div class="writing-main">
+              <h3 class="writing-title"><a href="https://www.lesswrong.com/posts/FogmcDHA6AdMGukum/alignment-engineering-vs-misalignment-science" target="_blank" rel="noopener">&ldquo;Alignment Engineering&rdquo; vs. &ldquo;Misalignment Science&rdquo;</a></h3>
+              <p class="writing-by">Edward James Young</p>
+              <p class="writing-aff">Geodesic Research</p>
+            </div>
+          </article>
+          <article class="writing-item">
+            <div class="writing-meta">
+              <time class="writing-date" datetime="2026-09-16">Sep 16, 2026</time>
+              <span class="writing-tag">Strategy</span>
+            </div>
+            <div class="writing-main">
+              <h3 class="writing-title"><a href="https://www.lesswrong.com/posts/aCGx79eGafwDcXEgf/reducing-the-resource-gap-between-lab-and-external-safety" target="_blank" rel="noopener">Reducing the Resource Gap Between Lab and External Safety Researchers</a></h3>
+              <p class="writing-by">Alexandra Narin, Kyle O&rsquo;Brien and Puria Radmard</p>
+              <p class="writing-aff">Geodesic Research</p>
+            </div>
+          </article>
+          <article class="writing-item">
+            <div class="writing-meta">
+              <time class="writing-date" datetime="2026-09-15">Sep 15, 2026</time>
+              <span class="writing-tag">Empirics</span>
+            </div>
+            <div class="writing-main">
+              <h3 class="writing-title"><a href="https://www.lesswrong.com/posts/o4Jmyn25TWm8jRAy8/inoculation-midtraining-with-learned-neologisms" target="_blank" rel="noopener">Inoculation Midtraining with Learned Neologisms</a></h3>
+              <p class="writing-by">Kyle O&rsquo;Brien<sup>1</sup>, Edward James Young<sup>1</sup>, Puria Radmard<sup>1</sup>, Nathalie Kirch<sup>1</sup>, Cameron Tice<sup>1</sup>, Tomek Korbak<sup>2</sup> and David Demitri Africa<sup>3</sup></p>
+              <p class="writing-aff"><sup>1</sup>&thinsp;Geodesic Research; <sup>2</sup>&thinsp;Independent (ex-OpenAI); <sup>3</sup>&thinsp;UK AI Security Institute</p>
+            </div>
+    <a class="writing-artifact" href="https://arxiv.org/abs/2609.15886" target="_blank" rel="noopener" aria-label="Paper (opens in a new tab)"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M3.5 1.75h6l3 3v9.5h-9z"/><path d="M9.5 1.75v3h3M5.75 8h4.5M5.75 10.5h4.5"/></svg>Paper</a>
+          </article>
+          <article class="writing-item">
+            <div class="writing-meta">
+              <time class="writing-date" datetime="2026-07-08">Jul 8, 2026</time>
+              <span class="writing-tag">Conceptual</span>
+            </div>
+            <div class="writing-main">
+              <h3 class="writing-title"><a href="https://www.lesswrong.com/posts/5KHLQkW8M87FzbM5a/why-study-proto-training-gaming-as-an-adversarial-alignment" target="_blank" rel="noopener">Why study proto-training gaming as an adversarial alignment failure mode?</a></h3>
+              <p class="writing-by">Puria Radmard, Edward James Young and Cameron Tice</p>
+              <p class="writing-aff">Geodesic Research</p>
+            </div>
+          </article>
+          <article class="writing-item">
+            <div class="writing-meta">
+              <time class="writing-date" datetime="2026-07-08">Jul 8, 2026</time>
+              <span class="writing-tag">Conceptual</span>
+            </div>
+            <div class="writing-main">
+              <h3 class="writing-title"><a href="https://www.lesswrong.com/posts/nhjkHsppEk98xxmPe/why-study-alignment-interventions-on-pre-rl-checkpoints" target="_blank" rel="noopener">Why study alignment interventions on pre-RL checkpoints?</a></h3>
+              <p class="writing-by">Edward James Young, Puria Radmard and Cameron Tice</p>
+              <p class="writing-aff">Geodesic Research</p>
+            </div>
+          </article>
+          <article class="writing-item">
+            <div class="writing-meta">
+              <time class="writing-date" datetime="2026-05-27">May 27, 2026</time>
+              <span class="writing-tag">Strategy</span>
+            </div>
+            <div class="writing-main">
+              <h3 class="writing-title"><a href="https://www.lesswrong.com/posts/xBbYGer8w45kxkaWr/announcing-geodesic-research" target="_blank" rel="noopener">Announcing Geodesic Research</a></h3>
+              <p class="writing-by">Puria Radmard, Cameron Tice, Alexandra Narin, Edward James Young and Kyle O&rsquo;Brien</p>
+              <p class="writing-aff">Geodesic Research</p>
+            </div>
+          </article>
+          <article class="writing-item">
+            <div class="writing-meta">
+              <time class="writing-date" datetime="2025-12-21">Dec 21, 2025</time>
+              <span class="writing-tag">Empirics</span>
+            </div>
+            <div class="writing-main">
+              <h3 class="writing-title"><a href="https://www.lesswrong.com/posts/TcfyGD2aKdZ7Rt3hk/alignment-pretraining-ai-discourse-causes-self-fulfilling" target="_blank" rel="noopener">Alignment Pretraining: AI Discourse Causes Self-Fulfilling (Mis)alignment</a></h3>
+              <p class="writing-by">Cameron Tice<sup>1</sup>, Puria Radmard<sup>1,2</sup>, Samuel Ratnam<sup>3</sup>, Andy Kim<sup>4</sup>, David Demitri Africa<sup>5</sup> and Kyle O&rsquo;Brien<sup>1</sup></p>
+              <p class="writing-aff"><sup>1</sup>&thinsp;Geodesic Research; <sup>2</sup>&thinsp;University of Cambridge; <sup>3</sup>&thinsp;University of Oxford; <sup>4</sup>&thinsp;Independent; <sup>5</sup>&thinsp;UK AI Security Institute</p>
+            </div>
+    <a class="writing-artifact" href="https://arxiv.org/abs/2601.10160" target="_blank" rel="noopener" aria-label="Paper (opens in a new tab)"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M3.5 1.75h6l3 3v9.5h-9z"/><path d="M9.5 1.75v3h3M5.75 8h4.5M5.75 10.5h4.5"/></svg>Paper</a>
+          </article>
           <!-- writing-feed:end -->
       </div>
     </div>
