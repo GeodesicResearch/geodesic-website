@@ -569,9 +569,22 @@
       font-weight: 600;
       line-height: 1;
       padding: 0.3rem 0.65rem;
-      border: 1px solid var(--accent);
+      border: 1px solid color-mix(in srgb, var(--tag) 40%, transparent);
       border-radius: 999px;
-      color: var(--accent);
+      color: var(--tag);
+      background: color-mix(in srgb, var(--tag) 8%, transparent);
+    }
+
+    .writing-tag--empirics {
+      --tag: var(--accent);
+    }
+
+    .writing-tag--conceptual {
+      --tag: #3f5a6e;
+    }
+
+    .writing-tag--strategy {
+      --tag: #8a5a12;
     }
 
     .writing-title {
@@ -1245,7 +1258,7 @@
           <article class="writing-item">
             <div class="writing-meta">
               <time class="writing-date" datetime="2026-10-05">Oct 5, 2026</time>
-              <span class="writing-tag">Empirics</span>
+              <span class="writing-tag writing-tag--empirics">Empirics</span>
             </div>
             <div class="writing-main">
               <h3 class="writing-title"><a href="https://www.lesswrong.com/posts/HwdXDoCH7KXdKsz7k/research-note-filtering-subversion-relevant-information-from" target="_blank" rel="noopener">Research Note: Filtering Subversion-Relevant Information From Pretraining Data Is Feasible</a></h3>
@@ -1256,7 +1269,7 @@
           <article class="writing-item">
             <div class="writing-meta">
               <time class="writing-date" datetime="2026-10-05">Oct 5, 2026</time>
-              <span class="writing-tag">Strategy</span>
+              <span class="writing-tag writing-tag--strategy">Strategy</span>
             </div>
             <div class="writing-main">
               <h3 class="writing-title"><a href="https://www.lesswrong.com/posts/FogmcDHA6AdMGukum/alignment-engineering-vs-misalignment-science" target="_blank" rel="noopener">&ldquo;Alignment Engineering&rdquo; vs. &ldquo;Misalignment Science&rdquo;</a></h3>
@@ -1267,7 +1280,7 @@
           <article class="writing-item">
             <div class="writing-meta">
               <time class="writing-date" datetime="2026-09-16">Sep 16, 2026</time>
-              <span class="writing-tag">Strategy</span>
+              <span class="writing-tag writing-tag--strategy">Strategy</span>
             </div>
             <div class="writing-main">
               <h3 class="writing-title"><a href="https://www.lesswrong.com/posts/aCGx79eGafwDcXEgf/reducing-the-resource-gap-between-lab-and-external-safety" target="_blank" rel="noopener">Reducing the Resource Gap Between Lab and External Safety Researchers</a></h3>
@@ -1278,7 +1291,7 @@
           <article class="writing-item">
             <div class="writing-meta">
               <time class="writing-date" datetime="2026-09-15">Sep 15, 2026</time>
-              <span class="writing-tag">Empirics</span>
+              <span class="writing-tag writing-tag--empirics">Empirics</span>
             </div>
             <div class="writing-main">
               <h3 class="writing-title"><a href="https://www.lesswrong.com/posts/o4Jmyn25TWm8jRAy8/inoculation-midtraining-with-learned-neologisms" target="_blank" rel="noopener">Inoculation Midtraining with Learned Neologisms</a></h3>
@@ -1290,7 +1303,7 @@
           <article class="writing-item">
             <div class="writing-meta">
               <time class="writing-date" datetime="2026-07-08">Jul 8, 2026</time>
-              <span class="writing-tag">Conceptual</span>
+              <span class="writing-tag writing-tag--conceptual">Conceptual</span>
             </div>
             <div class="writing-main">
               <h3 class="writing-title"><a href="https://www.lesswrong.com/posts/5KHLQkW8M87FzbM5a/why-study-proto-training-gaming-as-an-adversarial-alignment" target="_blank" rel="noopener">Why study proto-training gaming as an adversarial alignment failure mode?</a></h3>
@@ -1301,7 +1314,7 @@
           <article class="writing-item">
             <div class="writing-meta">
               <time class="writing-date" datetime="2026-07-08">Jul 8, 2026</time>
-              <span class="writing-tag">Conceptual</span>
+              <span class="writing-tag writing-tag--conceptual">Conceptual</span>
             </div>
             <div class="writing-main">
               <h3 class="writing-title"><a href="https://www.lesswrong.com/posts/nhjkHsppEk98xxmPe/why-study-alignment-interventions-on-pre-rl-checkpoints" target="_blank" rel="noopener">Why study alignment interventions on pre-RL checkpoints?</a></h3>
@@ -1312,7 +1325,7 @@
           <article class="writing-item">
             <div class="writing-meta">
               <time class="writing-date" datetime="2026-05-27">May 27, 2026</time>
-              <span class="writing-tag">Strategy</span>
+              <span class="writing-tag writing-tag--strategy">Strategy</span>
             </div>
             <div class="writing-main">
               <h3 class="writing-title"><a href="https://www.lesswrong.com/posts/xBbYGer8w45kxkaWr/announcing-geodesic-research" target="_blank" rel="noopener">Announcing Geodesic Research</a></h3>
@@ -1323,7 +1336,7 @@
           <article class="writing-item">
             <div class="writing-meta">
               <time class="writing-date" datetime="2025-12-21">Dec 21, 2025</time>
-              <span class="writing-tag">Empirics</span>
+              <span class="writing-tag writing-tag--empirics">Empirics</span>
             </div>
             <div class="writing-main">
               <h3 class="writing-title"><a href="https://www.lesswrong.com/posts/TcfyGD2aKdZ7Rt3hk/alignment-pretraining-ai-discourse-causes-self-fulfilling" target="_blank" rel="noopener">Alignment Pretraining: AI Discourse Causes Self-Fulfilling (Mis)alignment</a></h3>

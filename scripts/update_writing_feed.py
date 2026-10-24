@@ -123,7 +123,7 @@ def render(p):
     return f'''          <article class="writing-item">
             <div class="writing-meta">
               <time class="writing-date" datetime="{date}">{date.strftime("%b %-d, %Y")}</time>
-              <span class="writing-tag">{m["tag"]}</span>
+              <span class="writing-tag writing-tag--{m["tag"].lower()}">{m["tag"]}</span>
             </div>
             <div class="writing-main">
               <h3 class="writing-title"><a href="https://www.lesswrong.com/posts/{p["_id"]}/{p["slug"]}" target="_blank" rel="noopener">{esc(p["title"])}</a></h3>
