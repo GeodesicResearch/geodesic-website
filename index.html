@@ -531,42 +531,143 @@
       height: 14px;
     }
 
-    /* ========== PAPERS COLUMNS ========== */
-    .papers-columns {
+    /* ========== WRITING FEED ========== */
+    .writing-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .writing-head .section-label {
+      margin-bottom: 0;
+    }
+
+    .writing-nav {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .writing-nav button {
+      width: 2.25rem;
+      height: 2.25rem;
+      border-radius: 50%;
+      border: 1px solid var(--bg-warm);
+      background: transparent;
+      color: var(--accent);
+      cursor: pointer;
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 3rem;
-      align-items: stretch;
+      place-items: center;
+      transition: border-color 0.25s ease, opacity 0.25s ease;
     }
 
-    .papers-column {
+    .writing-nav button:hover:not(:disabled) {
+      border-color: var(--accent);
+    }
+
+    .writing-nav button:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    .writing-nav button:disabled {
+      opacity: 0.3;
+      cursor: default;
+    }
+
+    .writing-nav svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    .writing-feed {
+      display: flex;
+      gap: 2.5rem;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+      padding: 8px 0 0.5rem;
+      -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 3rem), transparent);
+      mask-image: linear-gradient(90deg, #000 calc(100% - 3rem), transparent);
+    }
+
+    .writing-feed.at-end {
+      -webkit-mask-image: none;
+      mask-image: none;
+    }
+
+    .writing-feed::-webkit-scrollbar {
+      display: none;
+    }
+
+    .writing-item {
+      flex: 0 0 min(300px, 78vw);
+      scroll-snap-align: start;
+      position: relative;
       display: flex;
       flex-direction: column;
+      padding-top: 1.75rem;
+      border-top: 1px solid var(--bg-warm);
+      color: var(--text);
     }
 
-    .papers-column .papers-list {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
+    .writing-item::before {
+      content: '';
+      position: absolute;
+      top: -4px;
+      left: 0;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--bg);
+      border: 1px solid var(--accent);
+      transition: background 0.25s ease;
     }
 
-    .papers-column .papers-list .research-card {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
+    .writing-item:hover::before,
+    .writing-item:focus-visible::before {
+      background: var(--accent);
     }
 
-    .papers-column .papers-list .research-card .research-card-link {
+    .writing-item:hover,
+    .writing-item:focus-visible {
+      color: var(--text);
+    }
+
+    .writing-item:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 6px;
+    }
+
+    .writing-date {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin-bottom: 0.6rem;
+    }
+
+    .writing-title {
+      font-family: var(--font-display);
+      font-size: 1.55rem;
+      font-weight: 500;
+      line-height: 1.25;
+      margin-bottom: 1rem;
+      text-decoration: underline;
+      text-decoration-color: transparent;
+      text-underline-offset: 0.2em;
+      transition: text-decoration-color 0.25s ease;
+    }
+
+    .writing-item:hover .writing-title,
+    .writing-item:focus-visible .writing-title {
+      text-decoration-color: var(--accent);
+    }
+
+    .writing-by {
       margin-top: auto;
-      padding-top: 1.5rem;
-    }
-
-    @media (max-width: 768px) {
-      .papers-columns {
-        grid-template-columns: 1fr;
-        gap: 2.5rem;
-      }
+      font-size: 0.85rem;
+      line-height: 1.5;
+      color: var(--text-muted);
     }
 
     /* ========== TEAM ========== */
@@ -991,7 +1092,7 @@
     <ul class="nav-links" id="navLinks">
       <li><a href="#about">About</a></li>
       <li><a href="#research">Research</a></li>
-      <li><a href="#papers">Papers</a></li>
+      <li><a href="#writing">Writing</a></li>
       <li><a href="#team">Team</a></li>
       <li><a href="#advisors">Mentors</a></li>
       <li><a href="#careers">Careers</a></li>
@@ -1090,48 +1191,52 @@
     </div>
   </section>
 
-  <!-- Papers -->
-  <section class="section papers" id="papers">
+  <!-- Writing -->
+  <section class="section writing" id="writing">
     <div class="section-inner">
-      <div class="papers-columns">
-        <div class="papers-column">
-          <p class="section-label reveal">Key Papers</p>
-          <div class="papers-list">
-            <div class="research-card reveal" style="transition-delay: 0.15s;">
-              <div class="research-card-title">Alignment Pretraining: AI Discourse Causes Self-Fulfilling (Mis)alignment</div>
-              <a href="https://alignmentpretraining.ai/" target="_blank" rel="noopener" class="research-card-link">
-                Read paper
-                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 12L12 4M12 4H5M12 4v7"/></svg>
-              </a>
-            </div>
-            <div class="research-card reveal" style="transition-delay: 0.2s;">
-              <div class="research-card-title">Inoculation Midtraining with Learned Neologisms</div>
-              <a href="https://arxiv.org/abs/2609.15886v1" target="_blank" rel="noopener" class="research-card-link">
-                Read paper
-                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 12L12 4M12 4H5M12 4v7"/></svg>
-              </a>
-            </div>
-          </div>
+      <div class="writing-head reveal">
+        <p class="section-label">Writing on LessWrong</p>
+        <div class="writing-nav">
+          <button type="button" id="writingPrev" aria-label="Newer posts"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10 3L5 8l5 5"/></svg></button>
+          <button type="button" id="writingNext" aria-label="Earlier posts"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 3l5 5-5 5"/></svg></button>
         </div>
-        <div class="papers-column">
-          <p class="section-label reveal" style="transition-delay: 0.1s;">Blog Posts</p>
-          <div class="papers-list">
-            <div class="research-card reveal" style="transition-delay: 0.25s;">
-              <div class="research-card-title">Announcing Geodesic Research</div>
-              <a href="https://www.lesswrong.com/posts/xBbYGer8w45kxkaWr/announcing-geodesic-research" target="_blank" rel="noopener" class="research-card-link">
-                Read post
-                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 12L12 4M12 4H5M12 4v7"/></svg>
-              </a>
-            </div>
-            <div class="research-card reveal" style="transition-delay: 0.3s;">
-              <div class="research-card-title">Reducing the Resource Gap Between Lab and External Safety Researchers</div>
-              <a href="https://www.lesswrong.com/posts/aCGx79eGafwDcXEgf/reducing-the-resource-gap-between-lab-and-external-safety" target="_blank" rel="noopener" class="research-card-link">
-                Read post
-                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 12L12 4M12 4H5M12 4v7"/></svg>
-              </a>
-            </div>
-          </div>
-        </div>
+      </div>
+      <div class="writing-feed reveal" id="writingFeed" style="transition-delay: 0.1s;">
+          <a class="writing-item" href="https://www.lesswrong.com/posts/HwdXDoCH7KXdKsz7k/research-note-filtering-subversion-relevant-information-from" target="_blank" rel="noopener">
+            <time class="writing-date" datetime="2026-10-05">Oct 5, 2026</time>
+            <span class="writing-title">Research Note: Filtering Subversion-Relevant Information From Pretraining Data Is Feasible</span>
+            <span class="writing-by">Kyle O&rsquo;Brien, Spencer Kitts, Cam and Alek Westover</span>
+          </a>
+          <a class="writing-item" href="https://www.lesswrong.com/posts/FogmcDHA6AdMGukum/alignment-engineering-vs-misalignment-science" target="_blank" rel="noopener">
+            <time class="writing-date" datetime="2026-10-05">Oct 5, 2026</time>
+            <span class="writing-title">&ldquo;Alignment Engineering&rdquo; vs. &ldquo;Misalignment Science&rdquo;</span>
+            <span class="writing-by">Edward James Young</span>
+          </a>
+          <a class="writing-item" href="https://www.lesswrong.com/posts/aCGx79eGafwDcXEgf/reducing-the-resource-gap-between-lab-and-external-safety" target="_blank" rel="noopener">
+            <time class="writing-date" datetime="2026-09-16">Sep 16, 2026</time>
+            <span class="writing-title">Reducing the Resource Gap Between Lab and External Safety Researchers</span>
+            <span class="writing-by">Alexandra Narin, Kyle O&rsquo;Brien and Puria</span>
+          </a>
+          <a class="writing-item" href="https://www.lesswrong.com/posts/o4Jmyn25TWm8jRAy8/inoculation-midtraining-with-learned-neologisms" target="_blank" rel="noopener">
+            <time class="writing-date" datetime="2026-09-15">Sep 15, 2026</time>
+            <span class="writing-title">Inoculation Midtraining with Learned Neologisms</span>
+            <span class="writing-by">Kyle O&rsquo;Brien, Edward James Young and 5 others</span>
+          </a>
+          <a class="writing-item" href="https://www.lesswrong.com/posts/72AAjXAxS7Pow9Fie/toy-models-of-initialisation-effects-on-rl-dynamics" target="_blank" rel="noopener">
+            <time class="writing-date" datetime="2026-07-14">Jul 14, 2026</time>
+            <span class="writing-title">Toy Models of Initialisation Effects on RL Dynamics</span>
+            <span class="writing-by">Edward James Young and lennie</span>
+          </a>
+          <a class="writing-item" href="https://www.lesswrong.com/posts/5KHLQkW8M87FzbM5a/why-study-proto-training-gaming-as-an-adversarial-alignment" target="_blank" rel="noopener">
+            <time class="writing-date" datetime="2026-07-08">Jul 8, 2026</time>
+            <span class="writing-title">Why study proto-training gaming as an adversarial alignment failure mode?</span>
+            <span class="writing-by">Puria, Edward James Young and Cam</span>
+          </a>
+          <a class="writing-item" href="https://www.lesswrong.com/posts/nhjkHsppEk98xxmPe/why-study-alignment-interventions-on-pre-rl-checkpoints" target="_blank" rel="noopener">
+            <time class="writing-date" datetime="2026-07-08">Jul 8, 2026</time>
+            <span class="writing-title">Why study alignment interventions on pre-RL checkpoints?</span>
+            <span class="writing-by">Edward James Young, Puria and Cam</span>
+          </a>
       </div>
     </div>
   </section>
@@ -1608,6 +1713,26 @@
       });
 
       reveals.forEach(el => observer.observe(el));
+    })();
+
+    // ===== Writing feed =====
+    (function() {
+      const feed = document.getElementById('writingFeed');
+      const prev = document.getElementById('writingPrev');
+      const next = document.getElementById('writingNext');
+      const step = () => feed.querySelector('.writing-item').offsetWidth + 40;
+      function update() {
+        const max = feed.scrollWidth - feed.clientWidth - 2;
+        prev.disabled = feed.scrollLeft <= 2;
+        next.disabled = feed.scrollLeft >= max;
+        feed.classList.toggle('at-end', feed.scrollLeft >= max);
+      }
+      const go = dir => feed.scrollBy({ left: dir * step(), behavior: 'smooth' });
+      prev.addEventListener('click', () => go(-1));
+      next.addEventListener('click', () => go(1));
+      feed.addEventListener('scroll', update, { passive: true });
+      window.addEventListener('resize', update);
+      update();
     })();
 
     // ===== Nav scroll effect =====
