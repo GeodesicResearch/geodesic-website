@@ -1,0 +1,67 @@
+{
+  "_readme": "Metadata for scripts/update_writing_feed.py, which LessWrong cannot supply. 'roster' gives each person's default affiliation(s). 'posts' is keyed by LessWrong post id: 'tag' is Empirics, Conceptual or Strategy; 'authors' is the full byline in order (a name, or {name, aff} to override the roster for that post); 'artifact' is an optional linked paper or other output.",
+  "tags": ["Empirics", "Conceptual", "Strategy"],
+  "exclude": {
+    "FogmcDHA6AdMGukum": "“Alignment Engineering” vs. “Misalignment Science”, left off by request"
+  },
+  "roster": {
+    "Cameron Tice": ["Geodesic Research"],
+    "Puria Radmard": ["Geodesic Research"],
+    "Alexandra Narin": ["Geodesic Research"],
+    "Edward James Young": ["Geodesic Research"],
+    "Kyle O'Brien": ["Geodesic Research"],
+    "Nathalie Kirch": ["Geodesic Research"],
+    "Nathaniel Mitrani Hadida": ["Geodesic Research"],
+    "Tomek Korbak": ["OpenAI"],
+    "Alex Turner": ["Independent (ex-Google DeepMind)"],
+    "Alex Cloud": ["Anthropic"],
+    "David Demitri Africa": ["UK AI Security Institute"]
+  },
+  "posts": {
+    "HwdXDoCH7KXdKsz7k": {
+      "tag": "Empirics",
+      "authors": [
+        "Kyle O'Brien",
+        {"name": "Spencer Kitts", "aff": ["Redwood Research"]},
+        "Cameron Tice",
+        {"name": "Alek Westover", "aff": ["Redwood Research"]}
+      ]
+    },
+    "aCGx79eGafwDcXEgf": {
+      "tag": "Strategy",
+      "authors": ["Alexandra Narin", "Kyle O'Brien", "Puria Radmard"]
+    },
+    "o4Jmyn25TWm8jRAy8": {
+      "tag": "Empirics",
+      "authors": [
+        "Kyle O'Brien", "Edward James Young", "Puria Radmard", "Nathalie Kirch", "Cameron Tice",
+        "Tomek Korbak", "David Demitri Africa"
+      ],
+      "artifact": {"kind": "paper", "label": "Paper", "url": "https://arxiv.org/abs/2609.15886"}
+    },
+    "5KHLQkW8M87FzbM5a": {
+      "tag": "Conceptual",
+      "authors": ["Puria Radmard", "Edward James Young", "Cameron Tice"]
+    },
+    "nhjkHsppEk98xxmPe": {
+      "tag": "Conceptual",
+      "authors": ["Edward James Young", "Puria Radmard", "Cameron Tice"]
+    },
+    "xBbYGer8w45kxkaWr": {
+      "tag": "Strategy",
+      "authors": ["Puria Radmard", "Cameron Tice", "Alexandra Narin", "Edward James Young", "Kyle O'Brien"]
+    },
+    "TcfyGD2aKdZ7Rt3hk": {
+      "tag": "Empirics",
+      "authors": [
+        "Cameron Tice",
+        {"name": "Puria Radmard", "aff": ["Geodesic Research", "University of Cambridge"]},
+        {"name": "Samuel Ratnam", "aff": ["University of Oxford"]},
+        {"name": "Andy Kim", "aff": ["Independent"]},
+        "David Demitri Africa",
+        "Kyle O'Brien"
+      ],
+      "artifact": {"kind": "paper", "label": "Paper", "url": "https://arxiv.org/abs/2601.10160"}
+    }
+  }
+}
