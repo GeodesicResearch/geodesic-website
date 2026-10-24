@@ -532,78 +532,18 @@
     }
 
     /* ========== WRITING FEED ========== */
-    .writing-head {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
+    .writing .section-label {
       margin-bottom: 1.5rem;
     }
 
-    .writing-head .section-label {
-      margin-bottom: 0;
-    }
-
-    .writing-nav {
-      display: flex;
-      gap: 0.5rem;
-    }
-
-    .writing-nav button {
-      width: 2.25rem;
-      height: 2.25rem;
-      border-radius: 50%;
-      border: 1px solid var(--bg-warm);
-      background: transparent;
-      color: var(--accent);
-      cursor: pointer;
-      display: grid;
-      place-items: center;
-      transition: border-color 0.25s ease, opacity 0.25s ease;
-    }
-
-    .writing-nav button:hover:not(:disabled) {
-      border-color: var(--accent);
-    }
-
-    .writing-nav button:focus-visible {
-      outline: 2px solid var(--accent);
-      outline-offset: 2px;
-    }
-
-    .writing-nav button:disabled {
-      opacity: 0.3;
-      cursor: default;
-    }
-
-    .writing-nav svg {
-      width: 14px;
-      height: 14px;
-    }
-
     .writing-feed {
-      display: flex;
-      gap: 2.5rem;
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      scrollbar-width: none;
-      padding: 8px 0 0.5rem;
-      -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 3rem), transparent);
-      mask-image: linear-gradient(90deg, #000 calc(100% - 3rem), transparent);
-    }
-
-    .writing-feed.at-end {
-      -webkit-mask-image: none;
-      mask-image: none;
-    }
-
-    .writing-feed::-webkit-scrollbar {
-      display: none;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 3rem 2.5rem;
+      padding-top: 8px;
     }
 
     .writing-item {
-      flex: 0 0 min(300px, 78vw);
-      scroll-snap-align: start;
       position: relative;
       display: flex;
       flex-direction: column;
@@ -990,6 +930,10 @@
 
     /* ========== RESPONSIVE ========== */
     @media (max-width: 1024px) {
+      .writing-feed {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
       .research-grid {
         grid-template-columns: 1fr 1fr;
       }
@@ -1000,6 +944,11 @@
     }
 
     @media (max-width: 768px) {
+      .writing-feed {
+        grid-template-columns: 1fr;
+        gap: 2.25rem;
+      }
+
       .section {
         padding: 2rem 1.5rem;
       }
@@ -1194,13 +1143,7 @@
   <!-- Writing -->
   <section class="section writing" id="writing">
     <div class="section-inner">
-      <div class="writing-head reveal">
-        <p class="section-label">Writing on LessWrong</p>
-        <div class="writing-nav">
-          <button type="button" id="writingPrev" aria-label="Newer posts"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10 3L5 8l5 5"/></svg></button>
-          <button type="button" id="writingNext" aria-label="Earlier posts"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 3l5 5-5 5"/></svg></button>
-        </div>
-      </div>
+      <p class="section-label reveal">Writing on LessWrong</p>
       <div class="writing-feed reveal" id="writingFeed" style="transition-delay: 0.1s;">
           <a class="writing-item" href="https://www.lesswrong.com/posts/HwdXDoCH7KXdKsz7k/research-note-filtering-subversion-relevant-information-from" target="_blank" rel="noopener">
             <time class="writing-date" datetime="2026-10-05">Oct 5, 2026</time>
@@ -1713,26 +1656,6 @@
       });
 
       reveals.forEach(el => observer.observe(el));
-    })();
-
-    // ===== Writing feed =====
-    (function() {
-      const feed = document.getElementById('writingFeed');
-      const prev = document.getElementById('writingPrev');
-      const next = document.getElementById('writingNext');
-      const step = () => feed.querySelector('.writing-item').offsetWidth + 40;
-      function update() {
-        const max = feed.scrollWidth - feed.clientWidth - 2;
-        prev.disabled = feed.scrollLeft <= 2;
-        next.disabled = feed.scrollLeft >= max;
-        feed.classList.toggle('at-end', feed.scrollLeft >= max);
-      }
-      const go = dir => feed.scrollBy({ left: dir * step(), behavior: 'smooth' });
-      prev.addEventListener('click', () => go(-1));
-      next.addEventListener('click', () => go(1));
-      feed.addEventListener('scroll', update, { passive: true });
-      window.addEventListener('resize', update);
-      update();
     })();
 
     // ===== Nav scroll effect =====
