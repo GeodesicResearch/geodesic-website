@@ -20,6 +20,7 @@ from pathlib import Path
 SINCE = "2025-12-21"  # the Alignment Pretraining post
 SOURCES = ["kyle-o-brien", "edward-james-young"]  # LessWrong user slugs
 ALWAYS_INCLUDE = "kyle o'brien"
+VISIBLE = 4  # posts shown before the "earlier posts" dropdown
 
 # Geodesic team (the Team section of index.html), by lowercase name and
 # the display names they use on LessWrong. Mentors are not included.
@@ -41,6 +42,7 @@ GRAPHQL = "https://www.lesswrong.com/graphql"
 
 ICONS = {
     "paper": '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M3.5 1.75h6l3 3v9.5h-9z"/><path d="M9.5 1.75v3h3M5.75 8h4.5M5.75 10.5h4.5"/></svg>',
+    "chevron": '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3.5 6l4.5 4.5L12.5 6"/></svg>',
     "link": '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M4 12L12 4M12 4H5M12 4v7"/></svg>',
 }
 
@@ -148,9 +150,20 @@ def main():
                  "\n".join(f'  {p["_id"]}  {p["title"]}  [{", ".join(lw_authors(p))}]' for p in missing))
     if dry:
         return
+    rows = [render(p) for p in kept]
+    body = "".join(rows[:VISIBLE])
+    if rows[VISIBLE:]:
+        body += f'''          <details class="writing-more">
+            <summary>
+              <span class="writing-more-closed">Show {len(rows) - VISIBLE} earlier posts</span>
+              <span class="writing-more-open">Hide earlier posts</span>
+              {ICONS["chevron"]}
+            </summary>
+{"".join(rows[VISIBLE:])}          </details>
+'''
     s = INDEX.read_text()
     a, b = s.index(START) + len(START), s.index(END)
-    INDEX.write_text(s[:a] + "\n" + "".join(render(p) for p in kept) + "          " + s[b:])
+    INDEX.write_text(s[:a] + "\n" + body + "          " + s[b:])
     print(f"wrote {len(kept)} posts to {INDEX.name}")
 
 
