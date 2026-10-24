@@ -155,8 +155,8 @@ def main():
     if rows[VISIBLE:]:
         body += f'''          <details class="writing-more">
             <summary>
-              <span class="writing-more-closed">Show {len(rows) - VISIBLE} earlier posts</span>
-              <span class="writing-more-open">Hide earlier posts</span>
+              <span class="writing-more-closed">Read earlier writing</span>
+              <span class="writing-more-open">Show less</span>
               {ICONS["chevron"]}
             </summary>
 {"".join(rows[VISIBLE:])}          </details>
