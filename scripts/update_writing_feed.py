@@ -77,6 +77,8 @@ def lw_authors(p):
 
 
 def keep(p):
+    if p["_id"] in META.get("exclude", {}):
+        return False
     names = [norm(a) for a in lw_authors(p)]
     return ALWAYS_INCLUDE in names or all(n in TEAM for n in names)
 

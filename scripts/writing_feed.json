@@ -1,6 +1,9 @@
 {
   "_readme": "Metadata for scripts/update_writing_feed.py, which LessWrong cannot supply. 'roster' gives each person's default affiliation(s). 'posts' is keyed by LessWrong post id: 'tag' is Empirics, Conceptual or Strategy; 'authors' is the full byline in order (a name, or {name, aff} to override the roster for that post); 'artifact' is an optional linked paper or other output.",
   "tags": ["Empirics", "Conceptual", "Strategy"],
+  "exclude": {
+    "FogmcDHA6AdMGukum": "“Alignment Engineering” vs. “Misalignment Science”, left off by request"
+  },
   "roster": {
     "Cameron Tice": ["Geodesic Research"],
     "Puria Radmard": ["Geodesic Research"],
@@ -23,10 +26,6 @@
         "Cameron Tice",
         {"name": "Alek Westover", "aff": ["Redwood Research"]}
       ]
-    },
-    "FogmcDHA6AdMGukum": {
-      "tag": "Strategy",
-      "authors": ["Edward James Young"]
     },
     "aCGx79eGafwDcXEgf": {
       "tag": "Strategy",
