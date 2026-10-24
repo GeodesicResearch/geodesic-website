@@ -20,7 +20,7 @@ from pathlib import Path
 SINCE = "2025-12-21"  # the Alignment Pretraining post
 SOURCES = ["kyle-o-brien", "edward-james-young"]  # LessWrong user slugs
 ALWAYS_INCLUDE = "kyle o'brien"
-VISIBLE = 4  # posts shown before the "earlier posts" dropdown
+VISIBLE = None  # set to e.g. 4 to collapse older posts behind a dropdown
 
 # Geodesic team (the Team section of index.html), by lowercase name and
 # the display names they use on LessWrong. Mentors are not included.
@@ -151,8 +151,8 @@ def main():
     if dry:
         return
     rows = [render(p) for p in kept]
-    body = "".join(rows[:VISIBLE])
-    if rows[VISIBLE:]:
+    body = "".join(rows[:VISIBLE])  # VISIBLE=None keeps every post visible
+    if VISIBLE is not None and rows[VISIBLE:]:
         body += f'''          <details class="writing-more">
             <summary>
               <span class="writing-more-closed">Read earlier writing</span>
